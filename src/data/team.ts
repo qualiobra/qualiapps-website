@@ -6,17 +6,20 @@ export const team: TeamMember[] = [
     name: 'Lucas Araújo',
     role: 'CEO e Fundador',
     description: 'Visionário por trás da QualiApps, com paixão por inovação em construção civil e tecnologia.',
+    image: '/lucas.png',
   },
   {
     id: 'felipe',
     name: 'Felipe Trindade',
     role: 'Desenvolvedor',
     description: 'Especialista em desenvolvimento de soluções robustas e escaláveis.',
+    image: '/felipe.jpeg',
   },
   {
     id: 'alana',
     name: 'Alana Caled',
     role: 'Desenvolvedora',
     description: 'Focada em criar experiências de usuário excepcionais e interfaces intuitivas.',
+    image: '/alana.jpeg',
   },
 ]

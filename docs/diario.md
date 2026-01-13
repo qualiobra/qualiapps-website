@@ -305,6 +305,34 @@ Todos os componentes foram atualizados para usar `useTheme()` e aplicar cores co
 
 ---
 
+## 13 de Janeiro de 2026 (Sessão 5)
+
+### O que foi feito
+Atualização de imagens para usar arquivos locais em vez de URLs externas.
+
+#### Imagens da Equipe
+- **Lucas Araújo** - `/lucas.png`
+- **Felipe Trindade** - `/felipe.jpeg`
+- **Alana Caled** - `/alana.jpeg`
+
+#### Imagem da Seção "Nossa História"
+- Substituída imagem do Unsplash por `/nossa-historia.png`
+
+### Arquivos modificados
+- `src/data/team.ts` - Adicionado campo `image` para cada membro
+- `src/components/sections/AboutSection.tsx` - Atualizada imagem da seção
+
+### Build
+- Build funcionando sem erros
+- index.js: 464.55 kB (gzip: 112.87 kB)
+
+### Próximos passos sugeridos
+- [ ] Otimizar imagens para web (compressão, formatos modernos como WebP)
+- [ ] Adicionar imagens para os projetos
+- [ ] Implementar lazy loading nas imagens
+
+---
+
 ## Template para novas entradas
 
 ```markdown
