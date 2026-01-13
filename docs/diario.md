@@ -213,8 +213,11 @@ VITE_GEMINI_API_KEY=sua_chave_aqui
 - Build funcionando sem erros
 - index.js: 246.28 kB (gzip: 74.66 kB)
 
+### Commit
+- `a8533b6` - feat: adiciona novas seções e redesenha layout do site
+
 ### Próximos passos sugeridos
-- [ ] Configurar chave API do Gemini para chat funcional
+- [x] Configurar chave API do Gemini para chat funcional
 - [ ] Adicionar mais testimonials
 - [ ] Criar imagens próprias para as seções
 - [ ] Adicionar animações de entrada nas novas seções
