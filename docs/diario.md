@@ -77,7 +77,9 @@ Este documento registra o progresso do desenvolvimento do site da QualiApps. Lei
   - forms: 83.53 kB (gzip: 25.15 kB)
 
 - **Logo e Favicon**
-  - Componente Logo.tsx atualizado para usar imagem PNG
+  - Componente Logo.tsx atualizado para usar favicon.png
+  - Adicionado suporte a tamanhos (sm, md, lg) no componente Logo
+  - Texto "qualiapps" exibido ao lado do ícone no header e footer
   - Adicionado `public/logo.png` e `public/favicon.png`
   - Favicon configurado no index.html
 
