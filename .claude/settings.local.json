@@ -18,7 +18,8 @@
       "Bash(git -C \"c:/Users/lucas/qualiapps\" add .)",
       "Bash(git -C \"c:/Users/lucas/qualiapps\" commit -m \"$\\(cat <<''EOF''\nfeat: implementa sistema de toggle de tema dark/light\n\n- Cria ThemeContext para gerenciar estado global do tema\n- Adiciona ThemeToggle com animação suave entre ícones Sol/Lua\n- Define variáveis CSS para ambos os temas \\(dark e light\\)\n- Atualiza todos os componentes para usar useTheme\\(\\) e classes condicionais\n- Logo \"quali\" muda de branco para preto no tema claro\n- Persiste preferência do usuário no localStorage\n- Detecta preferência do sistema \\(prefers-color-scheme\\)\n- Transições suaves de 300ms em todas as mudanças de tema\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
       "Bash(git -C \"c:/Users/lucas/qualiapps\" push origin master)",
-      "Bash(git -C \"c:/Users/lucas/qualiapps\" commit -m \"$\\(cat <<''EOF''\nfeat: adiciona imagens locais da equipe e seção nossa história\n\n- Lucas Araújo: /lucas.png\n- Felipe Trindade: /felipe.jpeg\n- Alana Caled: /alana.jpeg\n- Seção Nossa História: /nossa-historia.png\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
+      "Bash(git -C \"c:/Users/lucas/qualiapps\" commit -m \"$\\(cat <<''EOF''\nfeat: adiciona imagens locais da equipe e seção nossa história\n\n- Lucas Araújo: /lucas.png\n- Felipe Trindade: /felipe.jpeg\n- Alana Caled: /alana.jpeg\n- Seção Nossa História: /nossa-historia.png\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git -C \"c:/Users/lucas/qualiapps\" commit -m \"$\\(cat <<''EOF''\nfix: traduz mensagens de validação do formulário para português\n\n- Adiciona defaultValues para evitar erro \"expected string, received undefined\"\n- Mensagens de erro em PT-BR: nome, email e mensagem obrigatórios\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
     ]
   }
 }

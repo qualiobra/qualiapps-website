@@ -13,10 +13,10 @@ import { useTheme } from '@/contexts/ThemeContext'
 import { cn } from '@/lib/utils'
 
 const contactSchema = z.object({
-  name: z.string().min(2, 'Nome deve ter pelo menos 2 caracteres'),
-  email: z.string().email('Email inválido'),
+  name: z.string().min(1, 'Nome é obrigatório').min(2, 'Nome deve ter pelo menos 2 caracteres'),
+  email: z.string().min(1, 'Email é obrigatório').email('Email inválido'),
   phone: z.string().optional(),
-  message: z.string().min(10, 'Mensagem deve ter pelo menos 10 caracteres'),
+  message: z.string().min(1, 'Mensagem é obrigatória').min(10, 'Mensagem deve ter pelo menos 10 caracteres'),
 })
 
 type ContactFormData = z.infer<typeof contactSchema>
@@ -30,6 +30,12 @@ export function ContactSection() {
     reset,
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
+    defaultValues: {
+      name: '',
+      email: '',
+      phone: '',
+      message: '',
+    },
   })
 
   const onSubmit = async (data: ContactFormData) => {
