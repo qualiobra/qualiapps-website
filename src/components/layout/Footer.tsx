@@ -2,6 +2,7 @@ import { Link } from 'react-scroll'
 import { Heart, Mail, Phone, MapPin } from 'lucide-react'
 import { Logo } from '@/components/shared/Logo'
 import { Separator } from '@/components/ui/separator'
+import { PrivacyPolicy } from '@/components/shared/PrivacyPolicy'
 import { NAV_LINKS, COMPANY, WHATSAPP_URL } from '@/lib/constants'
 
 export function Footer() {
@@ -81,9 +82,13 @@ export function Footer() {
 
         {/* Copyright */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-neutral-500 text-sm">
-          <p>
-            &copy; {currentYear} {COMPANY.name}. Todos os direitos reservados.
-          </p>
+          <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4">
+            <p>
+              &copy; {currentYear} {COMPANY.name}. Todos os direitos reservados.
+            </p>
+            <span className="hidden md:inline">•</span>
+            <PrivacyPolicy />
+          </div>
           <p className="flex items-center gap-1">
             Valores: <span className="text-primary">Fé em Deus</span> •{' '}
             <span className="text-primary">Verdade</span> •{' '}
