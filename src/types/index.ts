@@ -3,6 +3,7 @@ export interface Service {
   title: string
   description: string
   icon: string
+  color?: 'cyan' | 'teal' | 'purple' | 'blue' | 'green' | 'orange'
 }
 
 export interface Project {

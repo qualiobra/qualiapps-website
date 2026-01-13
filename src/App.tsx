@@ -2,8 +2,12 @@ import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { WhatsAppButton } from '@/components/layout/WhatsAppButton'
 import { HeroSection } from '@/components/sections/HeroSection'
-import { AboutSection } from '@/components/sections/AboutSection'
 import { ServicesSection } from '@/components/sections/ServicesSection'
+import { AboutSection } from '@/components/sections/AboutSection'
+import { QualiObraSection } from '@/components/sections/QualiObraSection'
+import { ProcessSection } from '@/components/sections/ProcessSection'
+import { EstimatorSection } from '@/components/sections/EstimatorSection'
+import { TestimonialsSection } from '@/components/sections/TestimonialsSection'
 import { ProjectsSection } from '@/components/sections/ProjectsSection'
 import { TeamSection } from '@/components/sections/TeamSection'
 import { ContactSection } from '@/components/sections/ContactSection'
@@ -15,8 +19,12 @@ function App() {
 
       <main>
         <HeroSection />
-        <AboutSection />
         <ServicesSection />
+        <AboutSection />
+        <QualiObraSection />
+        <ProcessSection />
+        <EstimatorSection />
+        <TestimonialsSection />
         <ProjectsSection />
         <TeamSection />
         <ContactSection />

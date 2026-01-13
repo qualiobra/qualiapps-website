@@ -1,6 +1,6 @@
 import { Link } from 'react-scroll'
 import { motion } from 'motion/react'
-import { ArrowRight, ChevronDown } from 'lucide-react'
+import { ArrowRight, ChevronDown, Smartphone, Code, Rocket } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 export function HeroSection() {
@@ -75,25 +75,55 @@ export function HeroSection() {
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link to="contact" smooth={true} offset={-80} duration={500}>
+            <Link to="estimator" smooth={true} offset={-80} duration={500}>
               <Button
                 size="lg"
-                className="bg-primary hover:bg-primary-light text-secondary font-semibold px-8 group"
+                className="bg-secondary text-white hover:bg-neutral-800 font-semibold px-8 group"
               >
-                Fale Conosco
+                Estimar meu Projeto com IA
                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
-            <Link to="projects" smooth={true} offset={-80} duration={500}>
+            <Link to="services" smooth={true} offset={-80} duration={500}>
               <Button
                 size="lg"
                 variant="outline"
                 className="border-neutral-600 text-white hover:bg-white/10 hover:border-primary font-semibold px-8"
               >
-                Ver Projetos
+                Conhecer Serviços
               </Button>
             </Link>
           </div>
+
+          {/* Feature Cards */}
+          <motion.div
+            className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+          >
+            <div className="p-6 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-primary/50 transition-all hover:bg-white/10">
+              <div className="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <Smartphone className="h-6 w-6 text-primary" />
+              </div>
+              <h3 className="text-lg font-bold text-white mb-2">Mobile First</h3>
+              <p className="text-neutral-400 text-sm">Apps nativos e híbridos otimizados para qualquer dispositivo.</p>
+            </div>
+            <div className="p-6 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-teal-500/50 transition-all hover:bg-white/10">
+              <div className="w-12 h-12 bg-teal-500/20 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <Code className="h-6 w-6 text-teal-400" />
+              </div>
+              <h3 className="text-lg font-bold text-white mb-2">Web Moderna</h3>
+              <p className="text-neutral-400 text-sm">Plataformas escaláveis usando React, Node e Nuvem.</p>
+            </div>
+            <div className="p-6 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-blue-500/50 transition-all hover:bg-white/10">
+              <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <Rocket className="h-6 w-6 text-blue-400" />
+              </div>
+              <h3 className="text-lg font-bold text-white mb-2">Metodologia Ágil</h3>
+              <p className="text-neutral-400 text-sm">Entregas contínuas e feedback rápido para seu sucesso.</p>
+            </div>
+          </motion.div>
         </motion.div>
       </div>
 

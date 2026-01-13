@@ -104,6 +104,125 @@ Este documento registra o progresso do desenvolvimento do site da QualiApps. Lei
 
 ---
 
+## 13 de Janeiro de 2026 (Sessão 3)
+
+### O que foi feito
+Grande atualização visual e funcional baseada em uma versão alternativa do site.
+
+#### Hero Section - Cards de Destaque
+- Adicionados 3 cards abaixo dos CTAs:
+  - **Mobile First** - Apps nativos e híbridos
+  - **Web Moderna** - Plataformas escaláveis
+  - **Metodologia Ágil** - Entregas contínuas
+- Novos CTAs: "Estimar meu Projeto com IA" e "Conhecer Serviços"
+- Cards com efeitos hover e bordas animadas
+
+#### Services Section - Redesenhada
+- Expandido de 4 para **6 serviços**:
+  1. Desenvolvimento Mobile (cyan)
+  2. Aplicações Web (teal)
+  3. UI/UX Design (purple)
+  4. Backend & API (blue)
+  5. QA & Testes (green)
+  6. Consultoria Tech (orange)
+- Novo layout em grid 3x2
+- Fundo claro (neutral-50) para maior contraste
+- Cards com ícones coloridos que sobem no hover
+
+#### About Section - Cards de Valores Modernos
+- Redesenhada com layout de 2 colunas
+- Imagem com efeito de gradiente e borda rotacionada
+- Card flutuante "IA + Construção Civil"
+- Tags dos projetos com ícones diferenciados
+- **Valores em cards modernos** com:
+  - Barra colorida lateral
+  - Ícones animados no hover
+  - Descrições mais elaboradas
+
+#### QualiObra Section (NOVA)
+- Seção dedicada ao produto principal
+- Badge "Produto Exclusivo" em amarelo
+- Descrição da IA Quali
+- **Vídeo do YouTube embarcado**: https://youtu.be/SLiYfDUsmSE
+- Link para assistir no YouTube
+- Background escuro (neutral-900)
+
+#### Process Section (NOVA)
+- Seção sobre metodologia ágil
+- Checklist visual com ícones CheckCircle
+- 4 etapas: Discovery, Sprints, QA, Deploy
+- Imagem decorativa com borda gradiente
+
+#### Estimator Section (NOVA) - Chat com IA
+- **Chat interativo** para estimar projetos
+- Integração com **Google Gemini API**
+- Interface de chat moderna (dark theme)
+- Mensagens animadas com balões
+- **Botão "Enviar para WhatsApp"** que compila toda a conversa
+- Modo demo quando API key não configurada
+- Indicador "IA Online" com animação
+
+#### Testimonials Section (NOVA)
+- Depoimentos de parceiros
+- 2 testimonials:
+  - Thiago Muzuco (Engeral Construtora)
+  - Felipe Araújo (Casa Fácil Blocos)
+- Cards com aspas decorativas
+- Fotos de avatar
+
+### Arquivos criados
+- `src/components/sections/QualiObraSection.tsx`
+- `src/components/sections/ProcessSection.tsx`
+- `src/components/sections/EstimatorSection.tsx`
+- `src/components/sections/TestimonialsSection.tsx`
+- `src/services/geminiService.ts`
+- `src/data/testimonials.ts`
+
+### Arquivos modificados
+- `src/components/sections/HeroSection.tsx`
+- `src/components/sections/ServicesSection.tsx`
+- `src/components/sections/AboutSection.tsx`
+- `src/components/shared/ServiceCard.tsx`
+- `src/data/services.ts`
+- `src/types/index.ts`
+- `src/App.tsx`
+- `package.json`
+
+### Dependências adicionadas
+- `@google/genai` - SDK do Google Gemini AI
+
+### Ordem das seções
+1. Hero (com cards de destaque)
+2. Services (6 serviços)
+3. About (com valores em cards)
+4. QualiObra (vídeo YouTube)
+5. Process (metodologia)
+6. Estimator (chat IA)
+7. Testimonials (depoimentos)
+8. Projects (mantida)
+9. Team (mantida)
+10. Contact (mantida)
+
+### Configuração necessária
+Para usar o chat com IA, criar arquivo `.env.local` na raiz:
+```
+VITE_GEMINI_API_KEY=sua_chave_aqui
+```
+
+### Build
+- Build funcionando sem erros
+- index.js: 246.28 kB (gzip: 74.66 kB)
+
+### Próximos passos sugeridos
+- [ ] Configurar chave API do Gemini para chat funcional
+- [ ] Adicionar mais testimonials
+- [ ] Criar imagens próprias para as seções
+- [ ] Adicionar animações de entrada nas novas seções
+- [ ] Testar responsividade em dispositivos móveis
+- [ ] Adicionar fotos reais da equipe
+
+---
+
 ## Template para novas entradas
 
 ```markdown
