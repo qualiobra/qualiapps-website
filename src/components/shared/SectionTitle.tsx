@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils'
 import { AnimatedSection } from './AnimatedSection'
+import { useTheme } from '@/contexts/ThemeContext'
 
 interface SectionTitleProps {
   title: string
@@ -14,6 +15,8 @@ export function SectionTitle({
   className,
   align = 'center'
 }: SectionTitleProps) {
+  const { isDark } = useTheme()
+
   const alignmentClasses = {
     left: 'text-left',
     center: 'text-center',
@@ -23,11 +26,21 @@ export function SectionTitle({
   return (
     <AnimatedSection className={cn('mb-12', className)}>
       <div className={alignmentClasses[align]}>
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+        <h2
+          className={cn(
+            'text-3xl md:text-4xl lg:text-5xl font-bold mb-4 transition-colors duration-300',
+            isDark ? 'text-white' : 'text-neutral-900'
+          )}
+        >
           {title}
         </h2>
         {subtitle && (
-          <p className="text-lg md:text-xl text-neutral-400 max-w-2xl mx-auto">
+          <p
+            className={cn(
+              'text-lg md:text-xl max-w-2xl mx-auto transition-colors duration-300',
+              isDark ? 'text-neutral-400' : 'text-neutral-500'
+            )}
+          >
             {subtitle}
           </p>
         )}

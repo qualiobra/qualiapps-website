@@ -1,6 +1,7 @@
 import { User, Linkedin, Github, Instagram } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
+import { useTheme } from '@/contexts/ThemeContext'
 import type { TeamMember } from '@/types'
 
 interface TeamCardProps {
@@ -9,11 +10,18 @@ interface TeamCardProps {
 }
 
 export function TeamCard({ member, className }: TeamCardProps) {
+  const { isDark } = useTheme()
+
   return (
-    <Card className={cn(
-      'bg-secondary-light border-neutral-800 hover:border-primary/50 transition-all duration-300 group text-center',
-      className
-    )}>
+    <Card
+      className={cn(
+        'transition-all duration-300 group text-center',
+        isDark
+          ? 'bg-secondary-light border-neutral-800 hover:border-primary/50'
+          : 'bg-white border-neutral-200 hover:border-primary/50 shadow-sm',
+        className
+      )}
+    >
       <CardContent className="p-6">
         {/* Avatar placeholder */}
         <div className="mx-auto mb-4 w-24 h-24 rounded-full bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center overflow-hidden">
@@ -28,13 +36,23 @@ export function TeamCard({ member, className }: TeamCardProps) {
           )}
         </div>
 
-        <h3 className="text-xl font-semibold text-white mb-1">
+        <h3
+          className={cn(
+            'text-xl font-semibold mb-1 transition-colors duration-300',
+            isDark ? 'text-white' : 'text-neutral-900'
+          )}
+        >
           {member.name}
         </h3>
         <p className="text-primary font-medium mb-3">
           {member.role}
         </p>
-        <p className="text-neutral-400 text-sm leading-relaxed mb-4">
+        <p
+          className={cn(
+            'text-sm leading-relaxed mb-4 transition-colors duration-300',
+            isDark ? 'text-neutral-400' : 'text-neutral-600'
+          )}
+        >
           {member.description}
         </p>
 
@@ -46,7 +64,12 @@ export function TeamCard({ member, className }: TeamCardProps) {
                 href={member.social.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-full bg-neutral-800 text-neutral-400 hover:bg-primary hover:text-secondary transition-colors"
+                className={cn(
+                  'p-2 rounded-full transition-colors',
+                  isDark
+                    ? 'bg-neutral-800 text-neutral-400 hover:bg-primary hover:text-secondary'
+                    : 'bg-neutral-100 text-neutral-500 hover:bg-primary hover:text-secondary'
+                )}
               >
                 <Linkedin className="h-4 w-4" />
               </a>
@@ -56,7 +79,12 @@ export function TeamCard({ member, className }: TeamCardProps) {
                 href={member.social.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-full bg-neutral-800 text-neutral-400 hover:bg-primary hover:text-secondary transition-colors"
+                className={cn(
+                  'p-2 rounded-full transition-colors',
+                  isDark
+                    ? 'bg-neutral-800 text-neutral-400 hover:bg-primary hover:text-secondary'
+                    : 'bg-neutral-100 text-neutral-500 hover:bg-primary hover:text-secondary'
+                )}
               >
                 <Github className="h-4 w-4" />
               </a>
@@ -66,7 +94,12 @@ export function TeamCard({ member, className }: TeamCardProps) {
                 href={member.social.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-full bg-neutral-800 text-neutral-400 hover:bg-primary hover:text-secondary transition-colors"
+                className={cn(
+                  'p-2 rounded-full transition-colors',
+                  isDark
+                    ? 'bg-neutral-800 text-neutral-400 hover:bg-primary hover:text-secondary'
+                    : 'bg-neutral-100 text-neutral-500 hover:bg-primary hover:text-secondary'
+                )}
               >
                 <Instagram className="h-4 w-4" />
               </a>

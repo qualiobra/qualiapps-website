@@ -29,7 +29,7 @@ export function Logo({ className, showText = true, size = 'md' }: LogoProps) {
 
       {showText && (
         <span className={cn(textSizeClasses[size], 'font-bold tracking-tight')}>
-          <span className="text-white">quali</span>
+          <span className="logo-quali">quali</span>
           <span className="text-primary">apps</span>
         </span>
       )}

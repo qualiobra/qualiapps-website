@@ -3,13 +3,16 @@ import { Link } from 'react-scroll'
 import { Menu } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Logo } from '@/components/shared/Logo'
+import { ThemeToggle } from '@/components/shared/ThemeToggle'
 import { MobileMenu } from './MobileMenu'
 import { NAV_LINKS } from '@/lib/constants'
 import { cn } from '@/lib/utils'
+import { useTheme } from '@/contexts/ThemeContext'
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const { isDark } = useTheme()
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50)
@@ -22,7 +25,9 @@ export function Header() {
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         isScrolled
-          ? 'bg-secondary/95 backdrop-blur-md shadow-lg shadow-black/20'
+          ? isDark
+            ? 'bg-secondary/95 backdrop-blur-md shadow-lg shadow-black/20'
+            : 'bg-white/95 backdrop-blur-md shadow-lg shadow-black/5'
           : 'bg-transparent'
       )}
     >
@@ -46,7 +51,12 @@ export function Header() {
                 smooth={true}
                 offset={-80}
                 duration={500}
-                className="cursor-pointer text-neutral-300 hover:text-primary transition-colors font-medium"
+                className={cn(
+                  'cursor-pointer transition-colors font-medium',
+                  isDark
+                    ? 'text-neutral-300 hover:text-primary'
+                    : 'text-neutral-600 hover:text-primary'
+                )}
                 activeClass="!text-primary"
               >
                 {link.name}
@@ -55,28 +65,38 @@ export function Header() {
           ))}
         </ul>
 
-        {/* CTA Button - Desktop */}
-        <Link
-          to="contact"
-          smooth={true}
-          offset={-80}
-          duration={500}
-          className="hidden md:block"
-        >
-          <Button className="bg-primary hover:bg-primary-light text-secondary font-semibold">
-            Fale Conosco
-          </Button>
-        </Link>
+        {/* Actions - Desktop */}
+        <div className="hidden md:flex items-center gap-2">
+          <ThemeToggle />
+          <Link
+            to="contact"
+            smooth={true}
+            offset={-80}
+            duration={500}
+          >
+            <Button className="bg-primary hover:bg-primary-light text-secondary font-semibold">
+              Fale Conosco
+            </Button>
+          </Link>
+        </div>
 
-        {/* Mobile Menu Button */}
-        <Button
-          variant="ghost"
-          size="icon"
-          className="md:hidden text-white hover:text-primary hover:bg-white/10"
-          onClick={() => setMobileMenuOpen(true)}
-        >
-          <Menu className="h-6 w-6" />
-        </Button>
+        {/* Mobile Actions */}
+        <div className="flex md:hidden items-center gap-2">
+          <ThemeToggle />
+          <Button
+            variant="ghost"
+            size="icon"
+            className={cn(
+              'hover:bg-white/10',
+              isDark
+                ? 'text-white hover:text-primary'
+                : 'text-neutral-700 hover:text-primary'
+            )}
+            onClick={() => setMobileMenuOpen(true)}
+          >
+            <Menu className="h-6 w-6" />
+          </Button>
+        </div>
       </nav>
 
       <MobileMenu

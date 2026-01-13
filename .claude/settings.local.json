@@ -9,7 +9,13 @@
       "Bash(gh repo create:*)",
       "Bash(git init:*)",
       "Bash(git add:*)",
-      "Bash(git commit -m \"$\\(cat <<''EOF''\nfeat: Landing page inicial da QualiApps\n\n- Hero section com CTAs e animações\n- Seção Sobre com história, missão e valores\n- Seção de Serviços \\(Web, Mobile, IA, Construção\\)\n- Seção de Projetos \\(QualiObra, QualiClub, websites\\)\n- Seção de Equipe \\(Lucas, Felipe, Alana\\)\n- Seção de Contato com formulário e WhatsApp\n- Botão flutuante do WhatsApp\n- Design responsivo com Tailwind CSS\n- Animações de scroll com Motion\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nfeat: Landing page inicial da QualiApps\n\n- Hero section com CTAs e animações\n- Seção Sobre com história, missão e valores\n- Seção de Serviços \\(Web, Mobile, IA, Construção\\)\n- Seção de Projetos \\(QualiObra, QualiClub, websites\\)\n- Seção de Equipe \\(Lucas, Felipe, Alana\\)\n- Seção de Contato com formulário e WhatsApp\n- Botão flutuante do WhatsApp\n- Design responsivo com Tailwind CSS\n- Animações de scroll com Motion\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(ls -la \"c:\\\\Users\\\\lucas\\\\qualiapps\\\\public\"\" 2>&1 || echo \"Diretório public não encontrado \")",
+      "Bash(cd:*)",
+      "Bash(ls:*)",
+      "Bash(git -C \"c:/Users/lucas/qualiapps\" add .)"
     ]
   }
 }

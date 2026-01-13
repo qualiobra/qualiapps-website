@@ -226,6 +226,85 @@ VITE_GEMINI_API_KEY=sua_chave_aqui
 
 ---
 
+## 13 de Janeiro de 2026 (Sessão 4)
+
+### O que foi feito
+Implementação completa de sistema de toggle de tema (dark/light mode) para padronizar a aparência do site.
+
+#### Sistema de Tema
+- **ThemeContext** (`src/contexts/ThemeContext.tsx`)
+  - Contexto React para gerenciar estado do tema globalmente
+  - Persiste preferência no localStorage
+  - Detecta preferência do sistema operacional
+  - Aplica classe `dark` ou `light` no elemento root
+
+- **ThemeToggle** (`src/components/shared/ThemeToggle.tsx`)
+  - Botão animado com ícones de Sol/Lua
+  - Transição suave entre temas
+  - Adicionado ao Header (desktop e mobile)
+
+#### CSS e Variáveis
+- **Variáveis de tema** em `src/index.css`
+  - `--theme-bg`, `--theme-text`, `--theme-border`, etc.
+  - Cores específicas para modo escuro e claro
+  - `--theme-logo-quali` para cor do texto "quali" na logo
+
+#### Componentes Atualizados
+Todos os componentes foram atualizados para usar `useTheme()` e aplicar cores condicionais:
+
+- **Layout:**
+  - `Header.tsx` - Background adaptativo quando scrollado
+  - `Footer.tsx` - Cores de fundo e texto
+  - `MobileMenu.tsx` - Background e bordas
+
+- **Seções:**
+  - `HeroSection.tsx` - Gradientes e cards
+  - `ServicesSection.tsx` - Fundo e textos
+  - `AboutSection.tsx` - Cards de valores
+  - `QualiObraSection.tsx` - Seção de destaque
+  - `ProcessSection.tsx` - Checklist e imagem
+  - `EstimatorSection.tsx` - Chat interface
+  - `TestimonialsSection.tsx` - Cards de depoimentos
+  - `ProjectsSection.tsx` - Cards de projetos
+  - `TeamSection.tsx` - Cards da equipe
+  - `ContactSection.tsx` - Formulário e cards de contato
+
+- **Componentes Compartilhados:**
+  - `Logo.tsx` - Texto "quali" muda de branco para preto
+  - `SectionTitle.tsx` - Títulos adaptáveis
+  - `ServiceCard.tsx` - Cards de serviço
+  - `ProjectCard.tsx` - Cards de projeto
+  - `TeamCard.tsx` - Cards da equipe
+
+### Arquivos criados
+- `src/contexts/ThemeContext.tsx`
+- `src/components/shared/ThemeToggle.tsx`
+
+### Arquivos modificados
+- `src/index.css` (variáveis de tema)
+- `src/App.tsx` (ThemeProvider)
+- `src/components/layout/Header.tsx`
+- `src/components/layout/Footer.tsx`
+- `src/components/layout/MobileMenu.tsx`
+- `src/components/shared/Logo.tsx`
+- `src/components/shared/SectionTitle.tsx`
+- `src/components/shared/ServiceCard.tsx`
+- `src/components/shared/ProjectCard.tsx`
+- `src/components/shared/TeamCard.tsx`
+- Todas as seções em `src/components/sections/`
+
+### Build
+- Build funcionando sem erros
+- index.js: 464.56 kB (gzip: 112.88 kB)
+
+### Próximos passos sugeridos
+- [ ] Testar toggle de tema em dispositivos móveis
+- [ ] Adicionar transição animada ao trocar tema
+- [ ] Considerar adicionar mais opções de tema (ex: sistema, sempre escuro, sempre claro)
+- [ ] Testar acessibilidade com diferentes temas
+
+---
+
 ## Template para novas entradas
 
 ```markdown

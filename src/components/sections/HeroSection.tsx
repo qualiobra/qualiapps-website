@@ -2,20 +2,36 @@ import { Link } from 'react-scroll'
 import { motion } from 'motion/react'
 import { ArrowRight, ChevronDown, Smartphone, Code, Rocket } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { useTheme } from '@/contexts/ThemeContext'
+import { cn } from '@/lib/utils'
 
 export function HeroSection() {
+  const { isDark } = useTheme()
+
   return (
     <section
       id="hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-secondary via-secondary to-primary/20" />
+      <div
+        className={cn(
+          'absolute inset-0 transition-colors duration-300',
+          isDark
+            ? 'bg-gradient-to-br from-secondary via-secondary to-primary/20'
+            : 'bg-gradient-to-br from-white via-neutral-50 to-primary/10'
+        )}
+      />
 
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
-          className="absolute -top-1/2 -right-1/2 w-full h-full bg-gradient-radial from-primary/10 to-transparent rounded-full blur-3xl"
+          className={cn(
+            'absolute -top-1/2 -right-1/2 w-full h-full rounded-full blur-3xl',
+            isDark
+              ? 'bg-gradient-radial from-primary/10 to-transparent'
+              : 'bg-gradient-radial from-primary/20 to-transparent'
+          )}
           animate={{
             scale: [1, 1.2, 1],
             opacity: [0.3, 0.5, 0.3],
@@ -27,7 +43,12 @@ export function HeroSection() {
           }}
         />
         <motion.div
-          className="absolute -bottom-1/2 -left-1/2 w-full h-full bg-gradient-radial from-primary/10 to-transparent rounded-full blur-3xl"
+          className={cn(
+            'absolute -bottom-1/2 -left-1/2 w-full h-full rounded-full blur-3xl',
+            isDark
+              ? 'bg-gradient-radial from-primary/10 to-transparent'
+              : 'bg-gradient-radial from-primary/15 to-transparent'
+          )}
           animate={{
             scale: [1.2, 1, 1.2],
             opacity: [0.5, 0.3, 0.5],
@@ -62,13 +83,23 @@ export function HeroSection() {
           </motion.div>
 
           {/* Headline */}
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+          <h1
+            className={cn(
+              'text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight transition-colors duration-300',
+              isDark ? 'text-white' : 'text-neutral-900'
+            )}
+          >
             Transformamos ideias em{' '}
             <span className="text-primary">soluções digitais</span>
           </h1>
 
           {/* Subheadline */}
-          <p className="text-lg md:text-xl text-neutral-300 max-w-2xl mx-auto mb-8 leading-relaxed">
+          <p
+            className={cn(
+              'text-lg md:text-xl max-w-2xl mx-auto mb-8 leading-relaxed transition-colors duration-300',
+              isDark ? 'text-neutral-300' : 'text-neutral-600'
+            )}
+          >
             Desenvolvimento de sistemas e websites para pequenas e médias empresas
             com preços justos e foco em inteligência artificial.
           </p>
@@ -78,7 +109,12 @@ export function HeroSection() {
             <Link to="estimator" smooth={true} offset={-80} duration={500}>
               <Button
                 size="lg"
-                className="bg-secondary text-white hover:bg-neutral-800 font-semibold px-8 group"
+                className={cn(
+                  'font-semibold px-8 group',
+                  isDark
+                    ? 'bg-secondary text-white hover:bg-neutral-800'
+                    : 'bg-neutral-900 text-white hover:bg-neutral-800'
+                )}
               >
                 Estimar meu Projeto com IA
                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
@@ -88,7 +124,12 @@ export function HeroSection() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-neutral-600 text-white hover:bg-white/10 hover:border-primary font-semibold px-8"
+                className={cn(
+                  'font-semibold px-8',
+                  isDark
+                    ? 'border-neutral-600 text-white hover:bg-white/10 hover:border-primary'
+                    : 'border-neutral-300 text-neutral-900 hover:bg-neutral-100 hover:border-primary'
+                )}
               >
                 Conhecer Serviços
               </Button>
@@ -102,32 +143,80 @@ export function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            <div className="p-6 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-primary/50 transition-all hover:bg-white/10">
+            <div
+              className={cn(
+                'p-6 backdrop-blur-sm rounded-2xl border transition-all',
+                isDark
+                  ? 'bg-white/5 border-white/10 hover:border-primary/50 hover:bg-white/10'
+                  : 'bg-white/80 border-neutral-200 hover:border-primary/50 hover:bg-white shadow-lg'
+              )}
+            >
               <div className="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center mx-auto mb-4">
                 <Smartphone className="h-6 w-6 text-primary" />
               </div>
-              <h3 className="text-lg font-bold text-white mb-2">Mobile First</h3>
-              <p className="text-neutral-400 text-sm">Apps nativos e híbridos otimizados para qualquer dispositivo.</p>
+              <h3
+                className={cn(
+                  'text-lg font-bold mb-2',
+                  isDark ? 'text-white' : 'text-neutral-900'
+                )}
+              >
+                Mobile First
+              </h3>
+              <p className={cn('text-sm', isDark ? 'text-neutral-400' : 'text-neutral-600')}>
+                Apps nativos e híbridos otimizados para qualquer dispositivo.
+              </p>
             </div>
-            <div className="p-6 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-teal-500/50 transition-all hover:bg-white/10">
+            <div
+              className={cn(
+                'p-6 backdrop-blur-sm rounded-2xl border transition-all',
+                isDark
+                  ? 'bg-white/5 border-white/10 hover:border-teal-500/50 hover:bg-white/10'
+                  : 'bg-white/80 border-neutral-200 hover:border-teal-500/50 hover:bg-white shadow-lg'
+              )}
+            >
               <div className="w-12 h-12 bg-teal-500/20 rounded-xl flex items-center justify-center mx-auto mb-4">
                 <Code className="h-6 w-6 text-teal-400" />
               </div>
-              <h3 className="text-lg font-bold text-white mb-2">Web Moderna</h3>
-              <p className="text-neutral-400 text-sm">Plataformas escaláveis usando React, Node e Nuvem.</p>
+              <h3
+                className={cn(
+                  'text-lg font-bold mb-2',
+                  isDark ? 'text-white' : 'text-neutral-900'
+                )}
+              >
+                Web Moderna
+              </h3>
+              <p className={cn('text-sm', isDark ? 'text-neutral-400' : 'text-neutral-600')}>
+                Plataformas escaláveis usando React, Node e Nuvem.
+              </p>
             </div>
-            <div className="p-6 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-blue-500/50 transition-all hover:bg-white/10">
+            <div
+              className={cn(
+                'p-6 backdrop-blur-sm rounded-2xl border transition-all',
+                isDark
+                  ? 'bg-white/5 border-white/10 hover:border-blue-500/50 hover:bg-white/10'
+                  : 'bg-white/80 border-neutral-200 hover:border-blue-500/50 hover:bg-white shadow-lg'
+              )}
+            >
               <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center mx-auto mb-4">
                 <Rocket className="h-6 w-6 text-blue-400" />
               </div>
-              <h3 className="text-lg font-bold text-white mb-2">Metodologia Ágil</h3>
-              <p className="text-neutral-400 text-sm">Entregas contínuas e feedback rápido para seu sucesso.</p>
+              <h3
+                className={cn(
+                  'text-lg font-bold mb-2',
+                  isDark ? 'text-white' : 'text-neutral-900'
+                )}
+              >
+                Metodologia Ágil
+              </h3>
+              <p className={cn('text-sm', isDark ? 'text-neutral-400' : 'text-neutral-600')}>
+                Entregas contínuas e feedback rápido para seu sucesso.
+              </p>
             </div>
           </motion.div>
         </motion.div>
       </div>
 
-      {/* Scroll indicator - posicionado na seção, não no container */}
+      {/* Scroll indicator */}
       <motion.div
         className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
         initial={{ opacity: 0 }}
@@ -144,7 +233,12 @@ export function HeroSection() {
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}
-            className="flex flex-col items-center text-neutral-500 hover:text-primary transition-colors"
+            className={cn(
+              'flex flex-col items-center transition-colors',
+              isDark
+                ? 'text-neutral-500 hover:text-primary'
+                : 'text-neutral-400 hover:text-primary'
+            )}
           >
             <span className="text-sm mb-2">Saiba mais</span>
             <ChevronDown className="h-5 w-5" />

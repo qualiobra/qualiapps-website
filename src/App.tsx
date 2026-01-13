@@ -1,3 +1,4 @@
+import { ThemeProvider } from '@/contexts/ThemeContext'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { WhatsAppButton } from '@/components/layout/WhatsAppButton'
@@ -14,25 +15,27 @@ import { ContactSection } from '@/components/sections/ContactSection'
 
 function App() {
   return (
-    <div className="min-h-screen bg-secondary text-white">
-      <Header />
+    <ThemeProvider>
+      <div className="min-h-screen theme-bg theme-text transition-colors duration-300">
+        <Header />
 
-      <main>
-        <HeroSection />
-        <ServicesSection />
-        <AboutSection />
-        <QualiObraSection />
-        <ProcessSection />
-        <EstimatorSection />
-        <TestimonialsSection />
-        <ProjectsSection />
-        <TeamSection />
-        <ContactSection />
-      </main>
+        <main>
+          <HeroSection />
+          <ServicesSection />
+          <AboutSection />
+          <QualiObraSection />
+          <ProcessSection />
+          <EstimatorSection />
+          <TestimonialsSection />
+          <ProjectsSection />
+          <TeamSection />
+          <ContactSection />
+        </main>
 
-      <Footer />
-      <WhatsAppButton />
-    </div>
+        <Footer />
+        <WhatsAppButton />
+      </div>
+    </ThemeProvider>
   )
 }
 

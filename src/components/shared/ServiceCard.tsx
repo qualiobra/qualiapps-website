@@ -12,6 +12,7 @@ import {
 } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
+import { useTheme } from '@/contexts/ThemeContext'
 import type { Service } from '@/types'
 
 const iconMap: Record<string, LucideIcon> = {
@@ -43,24 +44,42 @@ interface ServiceCardProps {
 export function ServiceCard({ service, className }: ServiceCardProps) {
   const Icon = iconMap[service.icon] || Globe
   const color = colorMap[service.color || 'cyan'] || colorMap.cyan
+  const { isDark } = useTheme()
 
   return (
-    <Card className={cn(
-      'bg-white border-neutral-100 hover:shadow-lg transition-all duration-300 group',
-      color.hover,
-      className
-    )}>
+    <Card
+      className={cn(
+        'transition-all duration-300 group',
+        isDark
+          ? 'bg-secondary border-neutral-800 hover:shadow-lg hover:shadow-black/20'
+          : 'bg-white border-neutral-100 hover:shadow-lg',
+        color.hover,
+        className
+      )}
+    >
       <CardContent className="p-8">
-        <div className={cn(
-          'mb-6 w-14 h-14 rounded-xl flex items-center justify-center shadow-md transform group-hover:-translate-y-1 transition-transform',
-          color.bg
-        )}>
+        <div
+          className={cn(
+            'mb-6 w-14 h-14 rounded-xl flex items-center justify-center shadow-md transform group-hover:-translate-y-1 transition-transform',
+            color.bg
+          )}
+        >
           <Icon className="h-8 w-8 text-white" />
         </div>
-        <h3 className="text-xl font-bold text-neutral-900 mb-3 group-hover:text-cyan-600 transition-colors">
+        <h3
+          className={cn(
+            'text-xl font-bold mb-3 group-hover:text-primary transition-colors',
+            isDark ? 'text-white' : 'text-neutral-900'
+          )}
+        >
           {service.title}
         </h3>
-        <p className="text-neutral-500 leading-relaxed">
+        <p
+          className={cn(
+            'leading-relaxed transition-colors duration-300',
+            isDark ? 'text-neutral-400' : 'text-neutral-500'
+          )}
+        >
           {service.description}
         </p>
       </CardContent>

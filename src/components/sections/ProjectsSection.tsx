@@ -2,14 +2,22 @@ import { SectionTitle } from '@/components/shared/SectionTitle'
 import { AnimatedSection } from '@/components/shared/AnimatedSection'
 import { ProjectCard } from '@/components/shared/ProjectCard'
 import { projects } from '@/data/projects'
+import { useTheme } from '@/contexts/ThemeContext'
+import { cn } from '@/lib/utils'
 
 export function ProjectsSection() {
-  // Separate featured projects
   const featuredProjects = projects.filter(p => p.featured)
   const otherProjects = projects.filter(p => !p.featured)
+  const { isDark } = useTheme()
 
   return (
-    <section id="projects" className="py-20 bg-secondary">
+    <section
+      id="projects"
+      className={cn(
+        'py-20 transition-colors duration-300',
+        isDark ? 'bg-secondary' : 'bg-white'
+      )}
+    >
       <div className="container mx-auto px-4">
         <SectionTitle
           title="Projetos"
@@ -38,7 +46,12 @@ export function ProjectsSection() {
         {otherProjects.length > 0 && (
           <div>
             <AnimatedSection delay={0.2}>
-              <h3 className="text-lg font-semibold text-neutral-400 mb-4">
+              <h3
+                className={cn(
+                  'text-lg font-semibold mb-4 transition-colors duration-300',
+                  isDark ? 'text-neutral-400' : 'text-neutral-500'
+                )}
+              >
                 Websites Entregues
               </h3>
             </AnimatedSection>

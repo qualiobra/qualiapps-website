@@ -2,10 +2,20 @@ import { SectionTitle } from '@/components/shared/SectionTitle'
 import { AnimatedSection } from '@/components/shared/AnimatedSection'
 import { TeamCard } from '@/components/shared/TeamCard'
 import { team } from '@/data/team'
+import { useTheme } from '@/contexts/ThemeContext'
+import { cn } from '@/lib/utils'
 
 export function TeamSection() {
+  const { isDark } = useTheme()
+
   return (
-    <section id="team" className="py-20 bg-secondary-light">
+    <section
+      id="team"
+      className={cn(
+        'py-20 transition-colors duration-300',
+        isDark ? 'bg-secondary-light' : 'bg-neutral-50'
+      )}
+    >
       <div className="container mx-auto px-4">
         <SectionTitle
           title="Nossa Equipe"
@@ -22,11 +32,28 @@ export function TeamSection() {
 
         {/* Hiring banner */}
         <AnimatedSection delay={0.4} className="mt-12">
-          <div className="max-w-2xl mx-auto text-center p-8 rounded-2xl bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20">
-            <h3 className="text-xl font-semibold text-white mb-2">
+          <div
+            className={cn(
+              'max-w-2xl mx-auto text-center p-8 rounded-2xl border transition-colors duration-300',
+              isDark
+                ? 'bg-gradient-to-r from-primary/10 to-primary/5 border-primary/20'
+                : 'bg-gradient-to-r from-primary/5 to-primary/10 border-primary/20'
+            )}
+          >
+            <h3
+              className={cn(
+                'text-xl font-semibold mb-2 transition-colors duration-300',
+                isDark ? 'text-white' : 'text-neutral-900'
+              )}
+            >
               Quer fazer parte do time?
             </h3>
-            <p className="text-neutral-400 mb-4">
+            <p
+              className={cn(
+                'mb-4 transition-colors duration-300',
+                isDark ? 'text-neutral-400' : 'text-neutral-600'
+              )}
+            >
               Estamos sempre em busca de talentos apaixonados por tecnologia.
             </p>
             <a

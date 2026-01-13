@@ -2,6 +2,7 @@ import { ExternalLink, Smartphone, Globe, Building2, CreditCard } from 'lucide-r
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
+import { useTheme } from '@/contexts/ThemeContext'
 import type { Project } from '@/types'
 
 const typeIcons = {
@@ -30,13 +31,19 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project, className }: ProjectCardProps) {
   const Icon = typeIcons[project.type]
+  const { isDark } = useTheme()
 
   return (
-    <Card className={cn(
-      'bg-secondary-light border-neutral-800 hover:border-primary/50 transition-all duration-300 group overflow-hidden',
-      project.featured && 'md:col-span-2 lg:col-span-1',
-      className
-    )}>
+    <Card
+      className={cn(
+        'transition-all duration-300 group overflow-hidden',
+        isDark
+          ? 'bg-secondary-light border-neutral-800 hover:border-primary/50'
+          : 'bg-white border-neutral-200 hover:border-primary/50 shadow-sm',
+        project.featured && 'md:col-span-2 lg:col-span-1',
+        className
+      )}
+    >
       {/* Header com ícone e status */}
       <div className="p-6 pb-0 flex items-start justify-between">
         <div className="p-3 rounded-lg bg-primary/10 text-primary">
@@ -51,10 +58,20 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
       </div>
 
       <CardContent className="p-6">
-        <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-primary transition-colors">
+        <h3
+          className={cn(
+            'text-xl font-semibold mb-2 group-hover:text-primary transition-colors',
+            isDark ? 'text-white' : 'text-neutral-900'
+          )}
+        >
           {project.name}
         </h3>
-        <p className="text-neutral-400 leading-relaxed mb-4 line-clamp-3">
+        <p
+          className={cn(
+            'leading-relaxed mb-4 line-clamp-3 transition-colors duration-300',
+            isDark ? 'text-neutral-400' : 'text-neutral-600'
+          )}
+        >
           {project.description}
         </p>
 
@@ -64,7 +81,12 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
             <Badge
               key={tag}
               variant="secondary"
-              className="bg-neutral-800 text-neutral-300 hover:bg-neutral-700"
+              className={cn(
+                'transition-colors duration-300',
+                isDark
+                  ? 'bg-neutral-800 text-neutral-300 hover:bg-neutral-700'
+                  : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
+              )}
             >
               {tag}
             </Badge>

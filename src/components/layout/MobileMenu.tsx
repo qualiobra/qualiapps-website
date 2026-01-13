@@ -9,6 +9,8 @@ import {
 import { Button } from '@/components/ui/button'
 import { Logo } from '@/components/shared/Logo'
 import { NAV_LINKS } from '@/lib/constants'
+import { useTheme } from '@/contexts/ThemeContext'
+import { cn } from '@/lib/utils'
 
 interface MobileMenuProps {
   open: boolean
@@ -16,20 +18,37 @@ interface MobileMenuProps {
 }
 
 export function MobileMenu({ open, onClose }: MobileMenuProps) {
+  const { isDark } = useTheme()
+
   return (
     <Sheet open={open} onOpenChange={onClose}>
       <SheetContent
         side="right"
-        className="w-[300px] bg-secondary border-neutral-800"
+        className={cn(
+          'w-[300px] transition-colors duration-300',
+          isDark
+            ? 'bg-secondary border-neutral-800'
+            : 'bg-white border-neutral-200'
+        )}
       >
-        <SheetHeader className="border-b border-neutral-800 pb-4">
+        <SheetHeader
+          className={cn(
+            'border-b pb-4 transition-colors duration-300',
+            isDark ? 'border-neutral-800' : 'border-neutral-200'
+          )}
+        >
           <SheetTitle className="flex items-center justify-between">
             <Logo showText={true} />
             <Button
               variant="ghost"
               size="icon"
               onClick={onClose}
-              className="text-neutral-400 hover:text-white hover:bg-white/10"
+              className={cn(
+                'transition-colors',
+                isDark
+                  ? 'text-neutral-400 hover:text-white hover:bg-white/10'
+                  : 'text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100'
+              )}
             >
               <X className="h-5 w-5" />
             </Button>
@@ -46,7 +65,12 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
                   smooth={true}
                   offset={-80}
                   duration={500}
-                  className="block py-3 px-4 rounded-lg text-neutral-300 hover:text-white hover:bg-white/5 transition-colors font-medium cursor-pointer"
+                  className={cn(
+                    'block py-3 px-4 rounded-lg transition-colors font-medium cursor-pointer',
+                    isDark
+                      ? 'text-neutral-300 hover:text-white hover:bg-white/5'
+                      : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100'
+                  )}
                   activeClass="!text-primary bg-primary/10"
                   onClick={onClose}
                 >

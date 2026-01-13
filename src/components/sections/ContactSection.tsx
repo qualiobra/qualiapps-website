@@ -9,6 +9,8 @@ import { Card, CardContent } from '@/components/ui/card'
 import { SectionTitle } from '@/components/shared/SectionTitle'
 import { AnimatedSection } from '@/components/shared/AnimatedSection'
 import { COMPANY, WHATSAPP_URL } from '@/lib/constants'
+import { useTheme } from '@/contexts/ThemeContext'
+import { cn } from '@/lib/utils'
 
 const contactSchema = z.object({
   name: z.string().min(2, 'Nome deve ter pelo menos 2 caracteres'),
@@ -20,6 +22,7 @@ const contactSchema = z.object({
 type ContactFormData = z.infer<typeof contactSchema>
 
 export function ContactSection() {
+  const { isDark } = useTheme()
   const {
     register,
     handleSubmit,
@@ -30,7 +33,6 @@ export function ContactSection() {
   })
 
   const onSubmit = async (data: ContactFormData) => {
-    // Create mailto link with form data
     const subject = encodeURIComponent(`Contato via site - ${data.name}`)
     const body = encodeURIComponent(
       `Nome: ${data.name}\nEmail: ${data.email}\nTelefone: ${data.phone || 'Não informado'}\n\nMensagem:\n${data.message}`
@@ -40,7 +42,13 @@ export function ContactSection() {
   }
 
   return (
-    <section id="contact" className="py-20 bg-secondary">
+    <section
+      id="contact"
+      className={cn(
+        'py-20 transition-colors duration-300',
+        isDark ? 'bg-secondary' : 'bg-white'
+      )}
+    >
       <div className="container mx-auto px-4">
         <SectionTitle
           title="Entre em Contato"
@@ -50,9 +58,21 @@ export function ContactSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
           {/* Contact Form */}
           <AnimatedSection direction="left">
-            <Card className="bg-secondary-light border-neutral-800">
+            <Card
+              className={cn(
+                'transition-colors duration-300',
+                isDark
+                  ? 'bg-secondary-light border-neutral-800'
+                  : 'bg-neutral-50 border-neutral-200'
+              )}
+            >
               <CardContent className="p-6">
-                <h3 className="text-xl font-semibold text-white mb-6">
+                <h3
+                  className={cn(
+                    'text-xl font-semibold mb-6 transition-colors duration-300',
+                    isDark ? 'text-white' : 'text-neutral-900'
+                  )}
+                >
                   Envie sua mensagem
                 </h3>
 
@@ -61,7 +81,12 @@ export function ContactSection() {
                     <Input
                       placeholder="Seu nome"
                       {...register('name')}
-                      className="bg-secondary border-neutral-700 text-white placeholder:text-neutral-500 focus:border-primary"
+                      className={cn(
+                        'transition-colors duration-300',
+                        isDark
+                          ? 'bg-secondary border-neutral-700 text-white placeholder:text-neutral-500 focus:border-primary'
+                          : 'bg-white border-neutral-300 text-neutral-900 placeholder:text-neutral-400 focus:border-primary'
+                      )}
                     />
                     {errors.name && (
                       <p className="text-accent-error text-sm mt-1">
@@ -75,7 +100,12 @@ export function ContactSection() {
                       type="email"
                       placeholder="Seu email"
                       {...register('email')}
-                      className="bg-secondary border-neutral-700 text-white placeholder:text-neutral-500 focus:border-primary"
+                      className={cn(
+                        'transition-colors duration-300',
+                        isDark
+                          ? 'bg-secondary border-neutral-700 text-white placeholder:text-neutral-500 focus:border-primary'
+                          : 'bg-white border-neutral-300 text-neutral-900 placeholder:text-neutral-400 focus:border-primary'
+                      )}
                     />
                     {errors.email && (
                       <p className="text-accent-error text-sm mt-1">
@@ -89,7 +119,12 @@ export function ContactSection() {
                       type="tel"
                       placeholder="Seu telefone (opcional)"
                       {...register('phone')}
-                      className="bg-secondary border-neutral-700 text-white placeholder:text-neutral-500 focus:border-primary"
+                      className={cn(
+                        'transition-colors duration-300',
+                        isDark
+                          ? 'bg-secondary border-neutral-700 text-white placeholder:text-neutral-500 focus:border-primary'
+                          : 'bg-white border-neutral-300 text-neutral-900 placeholder:text-neutral-400 focus:border-primary'
+                      )}
                     />
                   </div>
 
@@ -98,7 +133,12 @@ export function ContactSection() {
                       placeholder="Sua mensagem"
                       rows={4}
                       {...register('message')}
-                      className="bg-secondary border-neutral-700 text-white placeholder:text-neutral-500 focus:border-primary resize-none"
+                      className={cn(
+                        'resize-none transition-colors duration-300',
+                        isDark
+                          ? 'bg-secondary border-neutral-700 text-white placeholder:text-neutral-500 focus:border-primary'
+                          : 'bg-white border-neutral-300 text-neutral-900 placeholder:text-neutral-400 focus:border-primary'
+                      )}
                     />
                     {errors.message && (
                       <p className="text-accent-error text-sm mt-1">
@@ -130,7 +170,12 @@ export function ContactSection() {
           <AnimatedSection direction="right" delay={0.2}>
             <div className="space-y-6">
               <div>
-                <h3 className="text-xl font-semibold text-white mb-6">
+                <h3
+                  className={cn(
+                    'text-xl font-semibold mb-6 transition-colors duration-300',
+                    isDark ? 'text-white' : 'text-neutral-900'
+                  )}
+                >
                   Outras formas de contato
                 </h3>
 
@@ -148,8 +193,22 @@ export function ContactSection() {
                           <MessageCircle className="h-6 w-6" />
                         </div>
                         <div>
-                          <h4 className="font-semibold text-white">WhatsApp</h4>
-                          <p className="text-neutral-300">{COMPANY.phone}</p>
+                          <h4
+                            className={cn(
+                              'font-semibold transition-colors duration-300',
+                              isDark ? 'text-white' : 'text-neutral-900'
+                            )}
+                          >
+                            WhatsApp
+                          </h4>
+                          <p
+                            className={cn(
+                              'transition-colors duration-300',
+                              isDark ? 'text-neutral-300' : 'text-neutral-600'
+                            )}
+                          >
+                            {COMPANY.phone}
+                          </p>
                           <p className="text-sm text-whatsapp">
                             Resposta rápida
                           </p>
@@ -160,41 +219,104 @@ export function ContactSection() {
 
                   {/* Email */}
                   <a href={`mailto:${COMPANY.email}`} className="block">
-                    <Card className="bg-secondary-light border-neutral-800 hover:border-primary/50 transition-colors cursor-pointer">
+                    <Card
+                      className={cn(
+                        'transition-colors cursor-pointer',
+                        isDark
+                          ? 'bg-secondary-light border-neutral-800 hover:border-primary/50'
+                          : 'bg-neutral-50 border-neutral-200 hover:border-primary/50'
+                      )}
+                    >
                       <CardContent className="p-4 flex items-center gap-4">
                         <div className="p-3 rounded-lg bg-primary/10 text-primary">
                           <Mail className="h-6 w-6" />
                         </div>
                         <div>
-                          <h4 className="font-semibold text-white">Email</h4>
-                          <p className="text-neutral-300">{COMPANY.email}</p>
+                          <h4
+                            className={cn(
+                              'font-semibold transition-colors duration-300',
+                              isDark ? 'text-white' : 'text-neutral-900'
+                            )}
+                          >
+                            Email
+                          </h4>
+                          <p
+                            className={cn(
+                              'transition-colors duration-300',
+                              isDark ? 'text-neutral-300' : 'text-neutral-600'
+                            )}
+                          >
+                            {COMPANY.email}
+                          </p>
                         </div>
                       </CardContent>
                     </Card>
                   </a>
 
                   {/* Phone */}
-                  <Card className="bg-secondary-light border-neutral-800">
+                  <Card
+                    className={cn(
+                      'transition-colors duration-300',
+                      isDark
+                        ? 'bg-secondary-light border-neutral-800'
+                        : 'bg-neutral-50 border-neutral-200'
+                    )}
+                  >
                     <CardContent className="p-4 flex items-center gap-4">
                       <div className="p-3 rounded-lg bg-primary/10 text-primary">
                         <Phone className="h-6 w-6" />
                       </div>
                       <div>
-                        <h4 className="font-semibold text-white">Telefone</h4>
-                        <p className="text-neutral-300">{COMPANY.phone}</p>
+                        <h4
+                          className={cn(
+                            'font-semibold transition-colors duration-300',
+                            isDark ? 'text-white' : 'text-neutral-900'
+                          )}
+                        >
+                          Telefone
+                        </h4>
+                        <p
+                          className={cn(
+                            'transition-colors duration-300',
+                            isDark ? 'text-neutral-300' : 'text-neutral-600'
+                          )}
+                        >
+                          {COMPANY.phone}
+                        </p>
                       </div>
                     </CardContent>
                   </Card>
 
                   {/* Location */}
-                  <Card className="bg-secondary-light border-neutral-800">
+                  <Card
+                    className={cn(
+                      'transition-colors duration-300',
+                      isDark
+                        ? 'bg-secondary-light border-neutral-800'
+                        : 'bg-neutral-50 border-neutral-200'
+                    )}
+                  >
                     <CardContent className="p-4 flex items-center gap-4">
                       <div className="p-3 rounded-lg bg-primary/10 text-primary">
                         <MapPin className="h-6 w-6" />
                       </div>
                       <div>
-                        <h4 className="font-semibold text-white">Localização</h4>
-                        <p className="text-neutral-300">{COMPANY.location}</p>
+                        <h4
+                          className={cn(
+                            'font-semibold transition-colors duration-300',
+                            isDark ? 'text-white' : 'text-neutral-900'
+                          )}
+                        >
+                          Localização
+                        </h4>
+                        <p
+                          className={cn(
+                            'transition-colors duration-300',
+                            isDark ? 'text-neutral-300' : 'text-neutral-600'
+                          )}
+                        >
+                          {COMPANY.location}
+                        </p>
                       </div>
                     </CardContent>
                   </Card>
@@ -202,8 +324,20 @@ export function ContactSection() {
               </div>
 
               {/* Response time notice */}
-              <div className="p-4 rounded-lg bg-primary/5 border border-primary/20">
-                <p className="text-sm text-neutral-400">
+              <div
+                className={cn(
+                  'p-4 rounded-lg border transition-colors duration-300',
+                  isDark
+                    ? 'bg-primary/5 border-primary/20'
+                    : 'bg-primary/5 border-primary/20'
+                )}
+              >
+                <p
+                  className={cn(
+                    'text-sm transition-colors duration-300',
+                    isDark ? 'text-neutral-400' : 'text-neutral-600'
+                  )}
+                >
                   <span className="text-primary font-medium">Dica:</span> Para uma
                   resposta mais rápida, entre em contato pelo WhatsApp. Normalmente
                   respondemos em até 24 horas.
