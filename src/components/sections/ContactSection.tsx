@@ -405,19 +405,9 @@ export function ContactSection() {
 
           {/* Contact Info - Takes 5 columns */}
           <AnimatedSection direction="right" delay={0.2} className="lg:col-span-5">
-            <div className="space-y-6 h-full flex flex-col">
+            <div className="space-y-4 h-full flex flex-col">
               {/* Contact methods */}
-              <div className="space-y-4">
-                <h3
-                  className={cn(
-                    'text-lg font-bold tracking-tight mb-5',
-                    isDark ? 'text-white' : 'text-neutral-900'
-                  )}
-                >
-                  Fale conosco
-                </h3>
-
-                {contactMethods.map((method, index) => {
+              {contactMethods.map((method, index) => {
                   const Icon = method.icon
                   const isHighlighted = method.highlighted
 
@@ -498,7 +488,6 @@ export function ContactSection() {
                     </motion.a>
                   )
                 })}
-              </div>
 
               {/* Address card */}
               <motion.div
