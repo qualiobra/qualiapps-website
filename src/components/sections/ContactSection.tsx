@@ -15,10 +15,10 @@ import { useTheme } from '@/contexts/ThemeContext'
 import { cn } from '@/lib/utils'
 
 const contactSchema = z.object({
-  name: z.string({ message: 'Nome é obrigatório' }).min(2, 'Nome deve ter pelo menos 2 caracteres'),
-  email: z.string({ message: 'Email é obrigatório' }).email('Email inválido'),
-  whatsapp: z.string({ message: 'WhatsApp é obrigatório' }).min(10, 'WhatsApp deve ter pelo menos 10 dígitos'),
-  message: z.string({ message: 'Mensagem é obrigatória' }).min(10, 'Mensagem deve ter pelo menos 10 caracteres'),
+  name: z.string().min(1, 'Nome é obrigatório').min(2, 'Nome deve ter pelo menos 2 caracteres'),
+  email: z.string().min(1, 'Email é obrigatório').email('Email inválido'),
+  whatsapp: z.string().min(1, 'WhatsApp é obrigatório').min(10, 'WhatsApp deve ter pelo menos 10 dígitos'),
+  message: z.string().min(1, 'Mensagem é obrigatória').min(10, 'Mensagem deve ter pelo menos 10 caracteres'),
 })
 
 type ContactFormData = z.infer<typeof contactSchema>
