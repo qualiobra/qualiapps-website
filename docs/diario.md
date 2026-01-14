@@ -694,6 +694,9 @@ Atualizado `src/lib/constants.ts` com endereço completo:
 - Build funcionando sem erros
 - index.js: 473.52 kB (gzip: 115.89 kB)
 
+### Commit
+- `6a0be5a` - feat: redesign da seção de contato com endereço completo
+
 ### Próximos passos sugeridos
 - [ ] Testar responsividade em dispositivos móveis
 - [ ] Adicionar máscara de telefone brasileiro
