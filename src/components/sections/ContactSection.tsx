@@ -1,7 +1,9 @@
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { Send, Phone, Mail, MapPin, MessageCircle } from 'lucide-react'
+import emailjs from '@emailjs/browser'
+import { Send, Phone, Mail, MapPin, MessageCircle, CheckCircle, AlertCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -13,16 +15,17 @@ import { useTheme } from '@/contexts/ThemeContext'
 import { cn } from '@/lib/utils'
 
 const contactSchema = z.object({
-  name: z.string().min(1, 'Nome é obrigatório').min(2, 'Nome deve ter pelo menos 2 caracteres'),
-  email: z.string().min(1, 'Email é obrigatório').email('Email inválido'),
-  phone: z.string().optional(),
-  message: z.string().min(1, 'Mensagem é obrigatória').min(10, 'Mensagem deve ter pelo menos 10 caracteres'),
+  name: z.string({ message: 'Nome é obrigatório' }).min(2, 'Nome deve ter pelo menos 2 caracteres'),
+  email: z.string({ message: 'Email é obrigatório' }).email('Email inválido'),
+  whatsapp: z.string({ message: 'WhatsApp é obrigatório' }).min(10, 'WhatsApp deve ter pelo menos 10 dígitos'),
+  message: z.string({ message: 'Mensagem é obrigatória' }).min(10, 'Mensagem deve ter pelo menos 10 caracteres'),
 })
 
 type ContactFormData = z.infer<typeof contactSchema>
 
 export function ContactSection() {
   const { isDark } = useTheme()
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const {
     register,
     handleSubmit,
@@ -33,18 +36,32 @@ export function ContactSection() {
     defaultValues: {
       name: '',
       email: '',
-      phone: '',
+      whatsapp: '',
       message: '',
     },
   })
 
   const onSubmit = async (data: ContactFormData) => {
-    const subject = encodeURIComponent(`Contato via site - ${data.name}`)
-    const body = encodeURIComponent(
-      `Nome: ${data.name}\nEmail: ${data.email}\nTelefone: ${data.phone || 'Não informado'}\n\nMensagem:\n${data.message}`
-    )
-    window.location.href = `mailto:${COMPANY.email}?subject=${subject}&body=${body}`
-    reset()
+    try {
+      setSubmitStatus('idle')
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        {
+          from_name: data.name,
+          from_email: data.email,
+          whatsapp: data.whatsapp,
+          message: data.message,
+          to_email: 'contato@qualiapps.com.br',
+        },
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      )
+      setSubmitStatus('success')
+      reset()
+    } catch (error) {
+      console.error('Erro ao enviar email:', error)
+      setSubmitStatus('error')
+    }
   }
 
   return (
@@ -123,8 +140,8 @@ export function ContactSection() {
                   <div>
                     <Input
                       type="tel"
-                      placeholder="Seu telefone (opcional)"
-                      {...register('phone')}
+                      placeholder="Seu WhatsApp"
+                      {...register('whatsapp')}
                       className={cn(
                         'transition-colors duration-300',
                         isDark
@@ -132,6 +149,11 @@ export function ContactSection() {
                           : 'bg-white border-neutral-300 text-neutral-900 placeholder:text-neutral-400 focus:border-primary'
                       )}
                     />
+                    {errors.whatsapp && (
+                      <p className="text-accent-error text-sm mt-1">
+                        {errors.whatsapp.message}
+                      </p>
+                    )}
                   </div>
 
                   <div>
@@ -167,6 +189,22 @@ export function ContactSection() {
                       </>
                     )}
                   </Button>
+
+                  {/* Feedback de sucesso */}
+                  {submitStatus === 'success' && (
+                    <div className="flex items-center gap-2 p-3 rounded-lg bg-green-500/10 border border-green-500/30 text-green-500">
+                      <CheckCircle className="h-5 w-5" />
+                      <span className="text-sm font-medium">Mensagem enviada com sucesso!</span>
+                    </div>
+                  )}
+
+                  {/* Feedback de erro */}
+                  {submitStatus === 'error' && (
+                    <div className="flex items-center gap-2 p-3 rounded-lg bg-red-500/10 border border-red-500/30 text-red-500">
+                      <AlertCircle className="h-5 w-5" />
+                      <span className="text-sm font-medium">Erro ao enviar. Tente novamente.</span>
+                    </div>
+                  )}
                 </form>
               </CardContent>
             </Card>
