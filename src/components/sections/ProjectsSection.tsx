@@ -24,15 +24,15 @@ export function ProjectsSection() {
           subtitle="Conheça alguns dos nossos trabalhos"
         />
 
-        {/* Featured Projects */}
+        {/* Featured Projects - WebApps */}
         {featuredProjects.length > 0 && (
           <div className="mb-8">
             <AnimatedSection>
               <h3 className="text-lg font-semibold text-primary mb-4">
-                Projetos em Destaque
+                WebApps
               </h3>
             </AnimatedSection>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {featuredProjects.map((project, index) => (
                 <AnimatedSection key={project.id} delay={index * 0.1}>
                   <ProjectCard project={project} className="h-full" />
@@ -52,7 +52,7 @@ export function ProjectsSection() {
                   isDark ? 'text-neutral-400' : 'text-neutral-500'
                 )}
               >
-                Websites Entregues
+                Websites
               </h3>
             </AnimatedSection>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
