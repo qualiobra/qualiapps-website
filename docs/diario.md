@@ -699,6 +699,7 @@ Atualizado `src/lib/constants.ts` com endereço completo:
 - `7d6dd7d` - refactor: remove título redundante e alinha cards de contato
 - `28290b1` - refactor: move card de dica para baixo do formulário
 - `5ea4e11` - feat: atualiza seção de projetos com QualiBroker e novos status
+- `33c73eb` - refactor: renomeia seções de projetos e ajusta grid
 
 #### Alterações na Seção de Projetos
 - **QualiBroker** adicionado aos projetos em destaque (featured)
@@ -712,6 +713,10 @@ Atualizado `src/lib/constants.ts` com endereço completo:
   - Engeral: www.engeralro.com.br
   - Casa Fácil: www.casafacilblocos.com.br
   - Araújo Empreendimentos: www.araujoempreendimentos.com
+- **Renomeação das seções:**
+  - "Projetos em Destaque" → "WebApps"
+  - "Websites Entregues" → "Websites"
+- **Grid ajustado:** WebApps agora usa 3 colunas (igual Websites)
 
 ### Próximos passos sugeridos
 - [ ] Testar responsividade em dispositivos móveis
