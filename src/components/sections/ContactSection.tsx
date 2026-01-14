@@ -400,6 +400,30 @@ export function ContactSection() {
                   </motion.div>
                 )}
               </form>
+
+              {/* Quick tip */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                className={cn(
+                  'mt-6 p-4 rounded-2xl border-2 transition-all duration-300',
+                  isDark
+                    ? 'bg-primary/5 border-primary/20'
+                    : 'bg-primary/5 border-primary/10'
+                )}
+              >
+                <p
+                  className={cn(
+                    'text-sm leading-relaxed',
+                    isDark ? 'text-neutral-300' : 'text-neutral-600'
+                  )}
+                >
+                  <span className="font-bold text-primary">Dica:</span>{' '}
+                  Para projetos urgentes, o WhatsApp e o canal mais rapido.
+                  Respondemos em ate 24h por email.
+                </p>
+              </motion.div>
             </div>
           </AnimatedSection>
 
@@ -551,30 +575,6 @@ export function ContactSection() {
                   <MapPin className="w-4 h-4" />
                   Ver no Google Maps
                 </a>
-              </motion.div>
-
-              {/* Quick tip */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.7 }}
-                className={cn(
-                  'p-4 rounded-2xl border-2 transition-all duration-300',
-                  isDark
-                    ? 'bg-primary/5 border-primary/20'
-                    : 'bg-primary/5 border-primary/10'
-                )}
-              >
-                <p
-                  className={cn(
-                    'text-sm leading-relaxed',
-                    isDark ? 'text-neutral-300' : 'text-neutral-600'
-                  )}
-                >
-                  <span className="font-bold text-primary">Dica:</span>{' '}
-                  Para projetos urgentes, o WhatsApp e o canal mais rapido.
-                  Respondemos em ate 24h por email.
-                </p>
               </motion.div>
             </div>
           </AnimatedSection>
