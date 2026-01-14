@@ -14,7 +14,7 @@ export interface Project {
   image?: string
   tags: string[]
   featured?: boolean
-  status: 'completed' | 'active' | 'development'
+  status: 'completed' | 'active' | 'development' | 'beta'
   url?: string
 }
 

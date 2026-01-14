@@ -16,12 +16,14 @@ const statusLabels = {
   completed: 'Concluído',
   active: 'Ativo',
   development: 'Em desenvolvimento',
+  beta: 'Beta Test',
 }
 
 const statusColors = {
   completed: 'bg-accent-success/20 text-accent-success border-accent-success/30',
   active: 'bg-primary/20 text-primary border-primary/30',
   development: 'bg-accent-warning/20 text-accent-warning border-accent-warning/30',
+  beta: 'bg-purple-500/20 text-purple-400 border-purple-500/30',
 }
 
 interface ProjectCardProps {
@@ -95,14 +97,25 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
 
         {/* Link externo se houver */}
         {project.url && (
-          <a
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 inline-flex items-center gap-1 text-primary hover:text-primary-light transition-colors text-sm"
-          >
-            Ver projeto <ExternalLink className="h-4 w-4" />
-          </a>
+          project.id === 'qualibroker' ? (
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 text-purple-400 hover:bg-purple-500/30 border border-purple-500/30 transition-all text-sm font-semibold"
+            >
+              SEJA UM BETA TESTER <ExternalLink className="h-4 w-4" />
+            </a>
+          ) : (
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-flex items-center gap-1 text-primary hover:text-primary-light transition-colors text-sm"
+            >
+              Ver projeto <ExternalLink className="h-4 w-4" />
+            </a>
+          )
         )}
       </CardContent>
     </Card>

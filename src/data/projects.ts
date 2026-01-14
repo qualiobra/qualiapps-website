@@ -8,7 +8,7 @@ export const projects: Project[] = [
     type: 'mobile',
     tags: ['React Native', 'IA', 'Gamificação', 'TypeScript'],
     featured: true,
-    status: 'active',
+    status: 'development',
   },
   {
     id: 'qualiclub',
@@ -20,13 +20,24 @@ export const projects: Project[] = [
     status: 'development',
   },
   {
+    id: 'qualibroker',
+    name: 'QualiBroker',
+    description: 'Aplicativo de gestão de vendas inteligente para construtoras, incorporadoras e corretores de imóveis. Verifique unidades disponíveis, faça simulações e reserve unidades.',
+    type: 'mobile',
+    tags: ['React Native', 'Vendas', 'Imobiliário', 'TypeScript'],
+    featured: true,
+    status: 'beta',
+    url: 'https://www.qualibroker.app',
+  },
+  {
     id: 'engeral',
     name: 'Engeral Construtora',
     description: 'Site institucional moderno para construtora, destacando projetos e expertise em construção civil.',
     type: 'website',
     tags: ['React', 'Tailwind', 'Website'],
     featured: false,
-    status: 'completed',
+    status: 'development',
+    url: 'https://www.engeralro.com.br',
   },
   {
     id: 'casa-facil',
@@ -35,7 +46,8 @@ export const projects: Project[] = [
     type: 'website',
     tags: ['React', 'Tailwind', 'Website'],
     featured: false,
-    status: 'completed',
+    status: 'development',
+    url: 'https://www.casafacilblocos.com.br',
   },
   {
     id: 'araujo-empreendimentos',
@@ -45,5 +57,6 @@ export const projects: Project[] = [
     tags: ['React', 'Tailwind', 'Website'],
     featured: false,
     status: 'completed',
+    url: 'https://www.araujoempreendimentos.com',
   },
 ]
