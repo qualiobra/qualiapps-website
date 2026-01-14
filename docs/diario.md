@@ -351,8 +351,21 @@ Implementação de formulário de contato funcional com EmailJS.
 
 #### Mensagens de Validação em Português
 - Todas as mensagens de erro agora em português
-- Corrigido problema "Invalid input" usando Zod v4 `{ message: '...' }`
 - Mensagens: "Nome é obrigatório", "Email é obrigatório", "WhatsApp é obrigatório", etc.
+
+#### Bug Encontrado e Corrigido - Zod v4
+**Problema:** Ao usar `z.string({ message: '...' })` no Zod v4, a mensagem de erro sobrescrevia TODAS as validações do campo, fazendo com que mesmo campos preenchidos mostrassem "é obrigatório".
+
+**Solução:** Usar apenas `.min(1, '...')` para validação de campo obrigatório:
+```typescript
+// ❌ ERRADO - sobrescreve todas as mensagens
+z.string({ message: 'Nome é obrigatório' }).min(2, '...')
+
+// ✅ CORRETO - mensagem apenas quando vazio
+z.string().min(1, 'Nome é obrigatório').min(2, '...')
+```
+
+**Commit:** `b82a75a` - fix: corrige validação do formulário
 
 #### Feedback Visual
 - **Sucesso**: "Mensagem enviada com sucesso!" (verde)
