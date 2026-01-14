@@ -1,4 +1,3 @@
-import { describe, it, expect } from 'vitest'
 import { contactSchema } from '../validation'
 
 describe('contactSchema', () => {

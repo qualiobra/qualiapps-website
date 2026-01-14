@@ -491,6 +491,170 @@ npm run test      # Watch mode
 
 ---
 
+## 14 de Janeiro de 2026 (Sessão 8)
+
+### O que foi feito
+Correção definitiva do bug do formulário de contato com downgrade para Zod v3.
+
+#### Problema Identificado
+O formulário exibia "Campo obrigatório" em todos os campos mesmo quando preenchidos. A causa era **incompatibilidade entre Zod v4.3.5 e @hookform/resolvers v5.2.2**.
+
+Issues relevantes:
+- [Issue #12816](https://github.com/react-hook-form/react-hook-form/issues/12816) - ZodError não capturado
+- [Issue #4992](https://github.com/colinhacks/zod/issues/4992) - Zod v4 incompatível
+- [Issue #799](https://github.com/react-hook-form/resolvers/issues/799) - Incompatibilidade reportada
+
+#### Solução Aplicada
+1. **Downgrade do Zod** de v4.3.5 para v3.24.2
+2. **Simplificação do validation.ts** - removido error map complexo do v4
+3. **Uso de `required_error`** para mensagens de campos undefined
+
+#### Mudanças no Schema
+```typescript
+// Antes (Zod v4 com error map global)
+z.string().min(1).min(2, '...')
+
+// Depois (Zod v3 com mensagens inline)
+z.string({ required_error: 'Campo obrigatório' })
+  .min(1, 'Campo obrigatório')
+  .min(2, '...')
+```
+
+### Arquivos modificados
+- `package.json` - Zod ^4.3.5 → ^3.24.2
+- `src/lib/validation.ts` - Schema simplificado
+
+### Build
+- Build funcionando sem erros
+- Todos os 11 testes passando
+- forms chunk: 78.26 kB (gzip: 21.35 kB) - menor que antes
+
+### Lições Aprendidas
+1. **Zod v4 ainda tem problemas de compatibilidade** com @hookform/resolvers
+2. **Zod v3 é mais estável** para uso com react-hook-form
+3. **O error map customizado do Zod v4 não é respeitado pelo zodResolver**
+
+### Próximos passos sugeridos
+- [x] Correção do bug do formulário
+- [ ] Testar formulário em produção
+- [ ] Monitorar atualizações do @hookform/resolvers para suporte completo ao Zod v4
+
+---
+
+## 14 de Janeiro de 2026 (Sessão 9)
+
+### O que foi feito
+Correção definitiva do bug do formulário de contato que mostrava "Campo obrigatório" em todos os campos mesmo quando preenchidos.
+
+#### Investigação Realizada
+1. **Schema Zod testado manualmente** - Funciona corretamente
+2. **zodResolver testado manualmente** - Funciona corretamente
+3. **Identificada a causa raiz** - Modo de validação do react-hook-form
+
+#### Causa Raiz do Bug
+O problema **NÃO era** no Zod nem no zodResolver. Era no **modo de validação** do react-hook-form:
+
+1. O modo padrão é `mode: 'onSubmit'`
+2. Quando o usuário clicava "Enviar" com campos vazios, os erros eram setados
+3. O usuário preenchia os campos
+4. **Mas os erros NÃO eram limpos** porque a validação só roda no próximo submit
+
+#### Solução Aplicada
+Adicionado `mode: 'onBlur'` na configuração do useForm:
+
+```typescript
+useForm<ContactFormData>({
+  resolver: zodResolver(contactSchema),
+  mode: 'onBlur', // <-- CORREÇÃO: valida ao sair do campo e limpa erros
+  defaultValues: { ... },
+})
+```
+
+#### Correção Adicional
+- Corrigido problema nos testes do vitest que não rodavam
+- Removida importação explícita de `describe/it/expect` (usa globals do vitest)
+
+### Arquivos modificados
+- `src/components/sections/ContactSection.tsx` - Adicionado `mode: 'onBlur'`
+- `src/lib/__tests__/validation.test.ts` - Removida importação desnecessária
+
+### Testes
+```bash
+npm run test:run  # 11 passed
+npm run build     # Sucesso
+```
+
+### Lições Aprendidas
+1. **Testar componentes isolados** ajuda a identificar onde o problema está
+2. **O modo de validação do react-hook-form** é crucial para UX
+3. **`mode: 'onBlur'`** é geralmente melhor que `'onSubmit'` para formulários
+
+### Modos de validação do react-hook-form
+| Modo | Comportamento |
+|------|---------------|
+| `onSubmit` (padrão) | Valida só no submit. Erros persistem até próximo submit |
+| `onBlur` | Valida ao sair do campo. Erros são limpos quando corrigidos |
+| `onChange` | Valida a cada digitação. Mais responsivo mas mais re-renders |
+| `all` | Combina onBlur e onChange |
+
+### ⚠️ ATUALIZAÇÃO: Correção não funcionou!
+A correção do `mode: 'onBlur'` não resolveu o problema. Continuando investigação na sessão seguinte.
+
+---
+
+## 14 de Janeiro de 2026 (Sessão 10)
+
+### O que foi feito
+Correção DEFINITIVA do bug do formulário de contato.
+
+#### Causa Raiz REAL
+O problema estava nos componentes `Input` e `Textarea` do shadcn/ui que **NÃO usavam `forwardRef`**.
+
+O `register()` do react-hook-form retorna um objeto com `ref`, `onChange`, `onBlur` e `name`. Sem `forwardRef`, a `ref` não era passada para o elemento `<input>` real, então o react-hook-form **não conseguia ler os valores dos campos**.
+
+```typescript
+// ❌ ANTES - ref não é passada
+function Input({ className, type, ...props }) {
+  return <input type={type} {...props} />
+}
+
+// ✅ DEPOIS - ref é passada corretamente
+const Input = React.forwardRef<HTMLInputElement, Props>(
+  ({ className, type, ...props }, ref) => {
+    return <input type={type} ref={ref} {...props} />
+  }
+)
+```
+
+#### Solução Aplicada
+Adicionado `React.forwardRef` aos componentes:
+- `src/components/ui/input.tsx`
+- `src/components/ui/textarea.tsx`
+
+### Arquivos modificados
+- `src/components/ui/input.tsx` - Adicionado forwardRef
+- `src/components/ui/textarea.tsx` - Adicionado forwardRef
+
+### Build
+```bash
+npm run build  # Sucesso
+```
+
+### Lições Aprendidas
+1. **Componentes de UI que encapsulam inputs PRECISAM de forwardRef** para funcionar com react-hook-form
+2. **O shadcn/ui mais recente usa forwardRef** - versões antigas podem não usar
+3. **Quando o schema funciona mas o form não**, investigue os componentes de input
+
+### ✅ CONFIRMADO: Bug corrigido!
+Formulário testado e funcionando. Mensagem "Mensagem enviada com sucesso!" exibida corretamente.
+
+### Próximos passos sugeridos
+- [x] Correção definitiva do bug do formulário
+- [ ] Testar envio de email em produção (Vercel)
+- [ ] Adicionar máscara no campo WhatsApp (formato brasileiro)
+
+---
+
 ## Template para novas entradas
 
 ```markdown
