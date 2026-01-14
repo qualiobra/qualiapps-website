@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
 import emailjs from '@emailjs/browser'
 import { Send, Phone, Mail, MapPin, MessageCircle, CheckCircle, AlertCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -13,15 +12,7 @@ import { AnimatedSection } from '@/components/shared/AnimatedSection'
 import { COMPANY, WHATSAPP_URL } from '@/lib/constants'
 import { useTheme } from '@/contexts/ThemeContext'
 import { cn } from '@/lib/utils'
-
-const contactSchema = z.object({
-  name: z.string().min(1, 'Nome é obrigatório').min(2, 'Nome deve ter pelo menos 2 caracteres'),
-  email: z.string().min(1, 'Email é obrigatório').email('Email inválido'),
-  whatsapp: z.string().min(1, 'WhatsApp é obrigatório').min(10, 'WhatsApp deve ter pelo menos 10 dígitos'),
-  message: z.string().min(1, 'Mensagem é obrigatória').min(10, 'Mensagem deve ter pelo menos 10 caracteres'),
-})
-
-type ContactFormData = z.infer<typeof contactSchema>
+import { contactSchema, ContactFormData } from '@/lib/validation'
 
 export function ContactSection() {
   const { isDark } = useTheme()

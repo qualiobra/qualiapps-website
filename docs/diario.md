@@ -399,6 +399,98 @@ VITE_EMAILJS_PUBLIC_KEY=36CQghF2TELVNfdHI
 
 ---
 
+## 14 de Janeiro de 2026 (Sessão 7)
+
+### O que foi feito
+Correção definitiva das mensagens de validação com testes automatizados.
+
+#### Problema Identificado
+O formulário continuava exibindo "Invalid input" em inglês mesmo após correções anteriores. A causa raiz era a **incompatibilidade entre Zod v4.3.5 e @hookform/resolvers v5.2.2**.
+
+#### Investigação - Diferenças do Zod v4
+O Zod v4 mudou significativamente a estrutura de erros:
+
+| Zod v3 | Zod v4 |
+|--------|--------|
+| `error.errors` | `error.issues` |
+| `issue.type` | `issue.origin` |
+| `invalid_string` (email) | `invalid_format` com `format: 'email'` |
+| `ctx.defaultError` | Não existe mais |
+
+**Exemplo de issue no Zod v4:**
+```json
+{
+  "origin": "string",
+  "code": "too_small",
+  "minimum": 1,
+  "message": "Too small: expected string to have >=1 characters"
+}
+```
+
+#### Solução Implementada
+1. **Error Map Customizado** (`src/lib/validation.ts`)
+   - Intercepta todos os tipos de erro do Zod v4
+   - Traduz mensagens para português brasileiro
+   - Trata `invalid_format` para emails (Zod v4) e `invalid_string` (compat v3)
+
+2. **Schema Isolado**
+   - Movido de inline para arquivo dedicado
+   - Usa `z.input<typeof schema>` para compatibilidade com react-hook-form
+
+3. **Testes Automatizados com Vitest**
+   - 11 testes cobrindo todos os cenários
+   - Verifica que "Invalid input" nunca aparece
+   - Valida mensagens em português
+
+#### Arquivos criados
+- `vitest.config.ts` - Configuração do Vitest
+- `src/test/setup.ts` - Setup dos testes
+- `src/lib/validation.ts` - Schema + error map PT-BR
+- `src/lib/__tests__/validation.test.ts` - Testes unitários
+
+#### Arquivos modificados
+- `src/components/sections/ContactSection.tsx` - Importa schema do novo arquivo
+- `package.json` - Scripts de teste + dependências
+
+#### Dependências adicionadas
+- `vitest` - Framework de testes
+- `@testing-library/react` - Testes de componentes React
+- `@testing-library/jest-dom` - Matchers do Jest
+- `jsdom` - Ambiente de DOM para testes
+- `@types/jest` - Tipos do Jest
+
+#### Mensagens de Erro (PT-BR)
+| Caso | Mensagem |
+|------|----------|
+| Campo vazio | "Campo obrigatório" |
+| Email inválido | "Email inválido" |
+| Nome < 2 chars | "Nome deve ter pelo menos 2 caracteres" |
+| WhatsApp < 10 dígitos | "WhatsApp deve ter pelo menos 10 dígitos" |
+| Mensagem < 10 chars | "Mensagem deve ter pelo menos 10 caracteres" |
+
+### Testes
+```bash
+npm run test:run  # 11 passed
+npm run test      # Watch mode
+```
+
+### Build
+- Build funcionando sem erros
+- index.js: 470.77 kB (gzip: 114.83 kB)
+
+### Lições Aprendidas
+1. **Zod v4 quebra compatibilidade** com error maps antigos
+2. **Sempre testar validação** com testes automatizados
+3. **Isolar schemas** facilita manutenção e testes
+
+### Próximos passos sugeridos
+- [x] Correção definitiva das mensagens de validação
+- [x] Testes automatizados
+- [ ] Testar envio de email em produção
+- [ ] Adicionar máscara no campo WhatsApp (formato brasileiro)
+
+---
+
 ## Template para novas entradas
 
 ```markdown
