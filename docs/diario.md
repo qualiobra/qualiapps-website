@@ -697,6 +697,21 @@ Atualizado `src/lib/constants.ts` com endereço completo:
 ### Commits
 - `6a0be5a` - feat: redesign da seção de contato com endereço completo
 - `7d6dd7d` - refactor: remove título redundante e alinha cards de contato
+- `28290b1` - refactor: move card de dica para baixo do formulário
+- `5ea4e11` - feat: atualiza seção de projetos com QualiBroker e novos status
+
+#### Alterações na Seção de Projetos
+- **QualiBroker** adicionado aos projetos em destaque (featured)
+  - Status: Beta Test (roxo)
+  - CTA especial: "SEJA UM BETA TESTER"
+  - Link: www.qualibroker.app
+- **Status atualizados:**
+  - QualiObra, QualiClub, Engeral, Casa Fácil: "Em desenvolvimento"
+  - Araújo Empreendimentos: "Concluído"
+- **Links adicionados:**
+  - Engeral: www.engeralro.com.br
+  - Casa Fácil: www.casafacilblocos.com.br
+  - Araújo Empreendimentos: www.araujoempreendimentos.com
 
 ### Próximos passos sugeridos
 - [ ] Testar responsividade em dispositivos móveis
