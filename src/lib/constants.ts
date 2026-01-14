@@ -10,7 +10,14 @@ export const COMPANY = {
   email: 'contato@qualiapps.com.br',
   phone: '(69) 99602-1005',
   founded: 2025,
-  location: 'Brasil',
+  location: 'Porto Velho, RO',
+  address: {
+    street: 'Rua Litorânea, 2457',
+    neighborhood: 'Flodoaldo Pontes Pinto',
+    city: 'Porto Velho',
+    state: 'RO',
+    full: 'Rua Litorânea, 2457 - Flodoaldo Pontes Pinto, Porto Velho/RO',
+  },
 }
 
 export const NAV_LINKS: NavLink[] = [
