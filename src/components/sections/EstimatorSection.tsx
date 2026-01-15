@@ -1,10 +1,14 @@
 import { useState, useEffect, useRef } from 'react'
+import { motion } from 'motion/react'
 import { startChat, sendMessage } from '@/services/geminiService'
-import { Sparkles, Send, MessageSquare, Smartphone, Loader2 } from 'lucide-react'
+import { Sparkles, Send, MessageSquare, Smartphone, Loader2, CheckCircle, AlertCircle, MessageCircle } from 'lucide-react'
 import { AnimatedSection } from '@/components/shared/AnimatedSection'
 import { WHATSAPP_NUMBER } from '@/lib/constants'
 import { useTheme } from '@/contexts/ThemeContext'
 import { cn } from '@/lib/utils'
+import { isSummaryResponse } from '@/lib/summaryDetector'
+import { extractLeadData } from '@/lib/leadExtractor'
+import { sendLeadEmail } from '@/services/emailLeadService'
 
 interface Message {
   id: number
@@ -16,6 +20,9 @@ export function EstimatorSection() {
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
+  const [emailSent, setEmailSent] = useState(false)
+  const [emailSending, setEmailSending] = useState(false)
+  const [emailError, setEmailError] = useState<string | null>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
   const { isDark } = useTheme()
 
@@ -48,6 +55,23 @@ export function EstimatorSection() {
 
     setMessages((prev) => [...prev, aiMsg])
     setLoading(false)
+
+    // Detecta se a IA gerou um resumo e envia email automaticamente
+    if (isSummaryResponse(aiResponseText) && !emailSent) {
+      setEmailSending(true)
+      const allMessages = [...messages, userMsg, aiMsg]
+      const leadData = extractLeadData(allMessages)
+
+      const result = await sendLeadEmail(leadData)
+
+      if (result.success) {
+        setEmailSent(true)
+        setEmailError(null)
+      } else {
+        setEmailError(result.error || 'Erro ao enviar')
+      }
+      setEmailSending(false)
+    }
   }
 
   const handleWhatsApp = () => {
@@ -165,13 +189,25 @@ export function EstimatorSection() {
                     <p className="text-xs text-cyan-500">Assistente Virtual Inteligente</p>
                   </div>
                 </div>
-                <button
-                  onClick={handleWhatsApp}
-                  className="bg-green-600 hover:bg-green-500 text-white text-xs font-bold py-2 px-3 rounded-lg flex items-center transition-colors"
-                >
-                  <Smartphone size={14} className="mr-1" />
-                  Enviar p/ WhatsApp
-                </button>
+                {emailSent ? (
+                  <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-green-500/10 border border-green-500/30">
+                    <CheckCircle size={14} className="text-green-500" />
+                    <span className="text-green-500 text-xs font-bold">Enviado!</span>
+                  </div>
+                ) : emailSending ? (
+                  <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-cyan-500/10 border border-cyan-500/30">
+                    <Loader2 size={14} className="text-cyan-500 animate-spin" />
+                    <span className="text-cyan-500 text-xs font-bold">Enviando...</span>
+                  </div>
+                ) : (
+                  <button
+                    onClick={handleWhatsApp}
+                    className="bg-green-600 hover:bg-green-500 text-white text-xs font-bold py-2 px-3 rounded-lg flex items-center transition-colors"
+                  >
+                    <Smartphone size={14} className="mr-1" />
+                    Enviar p/ WhatsApp
+                  </button>
+                )}
               </div>
 
               {/* Messages Area */}
@@ -231,6 +267,67 @@ export function EstimatorSection() {
                       />
                     </div>
                   </div>
+                )}
+
+                {/* Mensagem de sucesso após envio do email */}
+                {emailSent && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className={cn(
+                      'p-4 rounded-xl border-2',
+                      'bg-green-500/10 border-green-500/30'
+                    )}
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 rounded-lg bg-green-500/20">
+                        <CheckCircle className="w-5 h-5 text-green-500" />
+                      </div>
+                      <div>
+                        <p className="font-semibold text-green-500">
+                          Suas informações foram enviadas!
+                        </p>
+                        <p className={cn('text-sm', isDark ? 'text-neutral-400' : 'text-neutral-500')}>
+                          Nossa equipe entrará em contato pelo WhatsApp informado.
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Botão WhatsApp como opção adicional */}
+                    <button
+                      onClick={handleWhatsApp}
+                      className="mt-4 w-full bg-green-600 hover:bg-green-500 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-colors"
+                    >
+                      <MessageCircle size={18} />
+                      Falar agora pelo WhatsApp
+                    </button>
+                  </motion.div>
+                )}
+
+                {/* Mensagem de erro se falhou */}
+                {emailError && !emailSent && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="p-4 rounded-xl bg-red-500/10 border-2 border-red-500/30"
+                  >
+                    <div className="flex items-center gap-3">
+                      <AlertCircle className="w-5 h-5 text-red-500" />
+                      <div>
+                        <p className="font-semibold text-red-500">Erro ao enviar</p>
+                        <p className={cn('text-sm', isDark ? 'text-neutral-400' : 'text-neutral-500')}>
+                          Use o botão WhatsApp para garantir o contato.
+                        </p>
+                      </div>
+                    </div>
+                    <button
+                      onClick={handleWhatsApp}
+                      className="mt-3 w-full bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors"
+                    >
+                      <Smartphone size={16} />
+                      Enviar pelo WhatsApp
+                    </button>
+                  </motion.div>
                 )}
               </div>
 

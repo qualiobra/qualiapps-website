@@ -725,6 +725,56 @@ Atualizado `src/lib/constants.ts` com endereço completo:
 
 ---
 
+## 14 de Janeiro de 2026 (Sessão 12)
+
+### O que foi feito
+Alteração do chat com IA para enviar leads por email automaticamente em vez de apenas botão WhatsApp.
+
+#### Nova Funcionalidade: Envio Automático de Leads por Email
+- **Fluxo alterado:**
+  1. IA pergunta primeiro o NOME do cliente
+  2. IA pergunta CELULAR/WhatsApp (com validação de formato)
+  3. IA faz perguntas sobre o projeto (tipo, funcionalidades, público-alvo, prazo)
+  4. Quando IA gera resumo → email enviado automaticamente via EmailJS
+  5. UI mostra mensagem de sucesso + botão WhatsApp como opção adicional
+
+#### Arquivos criados
+- `src/lib/phoneValidation.ts` - Validação de celular brasileiro (10-13 dígitos)
+- `src/lib/summaryDetector.ts` - Detecta palavras-chave de resumo na resposta da IA
+- `src/lib/leadExtractor.ts` - Extrai dados estruturados (nome, celular, tipo, funcionalidades)
+- `src/services/emailLeadService.ts` - Serviço de envio de email para leads
+
+#### Arquivos modificados
+- `src/services/geminiService.ts` - Nova system instruction com ordem de perguntas
+- `src/components/sections/EstimatorSection.tsx` - Lógica de envio automático + UI de feedback
+- `.env.local` - Adicionada variável `VITE_EMAILJS_AI_LEAD_TEMPLATE_ID`
+
+#### UI de Feedback
+- **Header do chat:** Mostra "Enviado!" (verde) ou "Enviando..." (cyan)
+- **Área de mensagens:** Card de sucesso verde com botão "Falar agora pelo WhatsApp"
+- **Tratamento de erro:** Se falhar, mostra card vermelho + botão WhatsApp como fallback
+
+### Configuração Necessária (Manual)
+Para funcionar 100%, criar template no painel do EmailJS:
+1. Acessar https://dashboard.emailjs.com/
+2. Criar novo template com ID: `template_ai_lead`
+3. Variáveis: `lead_nome`, `lead_celular`, `lead_tipo_projeto`, `lead_funcionalidades`, `lead_publico_alvo`, `lead_prazo`, `conversa_completa`, `resumo_ia`, `data_hora`
+
+**Nota:** Se o template não for criado, o sistema usará o template padrão do formulário de contato como fallback.
+
+### Build
+- Build funcionando sem erros
+- 11 testes passando
+- index.js: 481.59 kB (gzip: 118.30 kB)
+
+### Próximos passos sugeridos
+- [ ] Criar template `template_ai_lead` no EmailJS
+- [ ] Testar fluxo completo com IA real
+- [ ] Verificar email recebido em contato@qualiapps.com.br
+- [ ] Deploy na Vercel
+
+---
+
 ## Template para novas entradas
 
 ```markdown
