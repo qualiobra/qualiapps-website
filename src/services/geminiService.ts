@@ -17,7 +17,7 @@ export const startChat = async (): Promise<string> => {
 
   try {
     chatSession = ai.chats.create({
-      model: 'gemini-2.5-pro-preview-06-05',
+      model: 'gemini-3-pro-preview',
       config: {
         systemInstruction: `# Role (Papel) & Persona
 Você é um Consultor Comercial Sênior e Arquiteto de Software da QualiApps.
