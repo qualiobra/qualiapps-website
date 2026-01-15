@@ -775,6 +775,61 @@ Para funcionar 100%, criar template no painel do EmailJS:
 
 ---
 
+## 15 de Janeiro de 2026 (Sessão 13)
+
+### O que foi feito
+Melhorias na funcionalidade do chat com IA: renderização de markdown, bloqueio após envio e aprimoramento da extração de leads.
+
+#### 1. Renderização de Markdown no Chat
+- **Problema:** IA usava `**texto**` para negrito mas aparecia literalmente na tela
+- **Solução:** Instalado `react-markdown` e integrado ao componente de mensagens
+- Agora textos em negrito, itálico e outros formatos markdown são renderizados corretamente
+
+#### 2. Bloqueio do Chat Após Envio do Resumo
+- **Problema:** Usuário podia continuar conversando após o email ser enviado
+- **Solução:**
+  - Input desabilitado quando `emailSent` é true
+  - Placeholder muda para "Conversa finalizada"
+  - Botão de envio também bloqueado
+  - Visual com opacidade reduzida indica estado desabilitado
+
+#### 3. Melhoria na Extração de Leads
+- **Problema:** O extrator usava regex rígidos que não capturavam respostas naturais
+- **Solução:**
+  - Nova função `extractFromSummary()` que parseia o resumo estruturado da IA
+  - Extrai campos como `**Funcionalidades:**`, `**Público-alvo:**`, `**Prazo:**`
+  - Prioriza dados do resumo da IA, com fallback para extração da conversa
+
+#### 4. IA Propor Prazo Estimado
+- **Problema:** IA perguntava prazo ao cliente, que muitas vezes não sabia estimar ou dava prazos descabidos
+- **Solução:** Atualizado prompt para a IA:
+  1. Recapitular as funcionalidades discutidas
+  2. Propor prazo estimado baseado na complexidade:
+     - App simples: 1-2 meses
+     - App médio: 2-4 meses
+     - App complexo: 4-6 meses
+     - Sistema web: 3-6 meses
+  3. Perguntar se faz sentido ou se há urgência
+  4. Educar caso o cliente sugira prazo muito curto
+
+### Dependências adicionadas
+- `react-markdown` - Renderização de markdown em React
+
+### Arquivos criados/modificados
+- `src/components/sections/EstimatorSection.tsx` - Markdown + bloqueio do input
+- `src/lib/leadExtractor.ts` - Nova função extractFromSummary
+- `src/services/geminiService.ts` - Prompt atualizado (passo 6)
+
+### Build
+- Build funcionando sem erros
+
+### Próximos passos sugeridos
+- [ ] Testar fluxo completo com IA real
+- [ ] Verificar se extração de leads está funcionando corretamente
+- [ ] Deploy na Vercel
+
+---
+
 ## Template para novas entradas
 
 ```markdown

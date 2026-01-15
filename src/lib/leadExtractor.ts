@@ -17,6 +17,38 @@ interface Message {
 }
 
 /**
+ * Extrai dados estruturados do resumo formatado da IA
+ * O resumo da IA segue um formato markdown com campos como:
+ * - **Funcionalidades:** texto...
+ * - **Público-alvo:** texto...
+ * - **Prazo:** texto...
+ */
+function extractFromSummary(resumoIA: string): {
+  funcionalidades?: string
+  publicoAlvo?: string
+  prazo?: string
+  tipoProjeto?: string
+} {
+  const result: Record<string, string> = {}
+
+  const patterns: Record<string, RegExp> = {
+    funcionalidades: /\*\*Funcionalidades:?\*\*\s*([^\n]+)/i,
+    publicoAlvo: /\*\*Público-?alvo:?\*\*\s*([^\n]+)/i,
+    prazo: /\*\*Prazo:?\*\*\s*([^\n]+)/i,
+    tipoProjeto: /\*\*Tipo:?\*\*\s*([^\n]+)/i,
+  }
+
+  for (const [key, pattern] of Object.entries(patterns)) {
+    const match = resumoIA.match(pattern)
+    if (match && match[1]) {
+      result[key] = match[1].trim()
+    }
+  }
+
+  return result
+}
+
+/**
  * Extrai dados estruturados do lead a partir do historico da conversa
  */
 export function extractLeadData(messages: Message[]): LeadData {
@@ -38,17 +70,22 @@ export function extractLeadData(messages: Message[]): LeadData {
   // Extrai celular - mensagem que parece numero de telefone
   const celular = extractCelular(userMessages)
 
-  // Extrai tipo de projeto
-  const tipoProjeto = extractTipoProjeto(userMessages)
+  // Primeiro tenta extrair do resumo estruturado da IA
+  const summaryData = extractFromSummary(resumoIA)
 
-  // Extrai funcionalidades mencionadas
-  const funcionalidades = extractFuncionalidades(conversaCompleta)
+  // Extrai tipo de projeto (prioriza resumo da IA)
+  const tipoProjeto = summaryData.tipoProjeto || extractTipoProjeto(userMessages)
 
-  // Extrai publico-alvo
-  const publicoAlvo = extractPublicoAlvo(conversaCompleta)
+  // Extrai funcionalidades (prioriza resumo da IA)
+  const funcionalidades = summaryData.funcionalidades
+    ? [summaryData.funcionalidades]
+    : extractFuncionalidades(conversaCompleta)
 
-  // Extrai prazo
-  const prazo = extractPrazo(conversaCompleta)
+  // Extrai publico-alvo (prioriza resumo da IA)
+  const publicoAlvo = summaryData.publicoAlvo || extractPublicoAlvo(conversaCompleta)
+
+  // Extrai prazo (prioriza resumo da IA)
+  const prazo = summaryData.prazo || extractPrazo(conversaCompleta)
 
   return {
     nome,

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'motion/react'
+import ReactMarkdown from 'react-markdown'
 import { startChat, sendMessage } from '@/services/geminiService'
 import { Sparkles, Send, MessageSquare, Smartphone, Loader2, CheckCircle, AlertCircle, MessageCircle } from 'lucide-react'
 import { AnimatedSection } from '@/components/shared/AnimatedSection'
@@ -233,7 +234,18 @@ export function EstimatorSection() {
                             : 'bg-white text-neutral-700 rounded-bl-none shadow-sm border border-neutral-200'
                       )}
                     >
-                      {msg.text}
+                      {msg.sender === 'ai' ? (
+                        <ReactMarkdown
+                          components={{
+                            p: ({ children }) => <span className="block">{children}</span>,
+                            strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
+                          }}
+                        >
+                          {msg.text}
+                        </ReactMarkdown>
+                      ) : (
+                        msg.text
+                      )}
                     </div>
                   </div>
                 ))}
@@ -349,17 +361,19 @@ export function EstimatorSection() {
                     type="text"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
-                    placeholder="Digite sua resposta..."
+                    disabled={emailSent}
+                    placeholder={emailSent ? 'Conversa finalizada' : 'Digite sua resposta...'}
                     className={cn(
                       'flex-1 border rounded-xl px-4 py-3 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all',
                       isDark
                         ? 'bg-neutral-900 border-neutral-600 text-white placeholder:text-neutral-500'
-                        : 'bg-neutral-50 border-neutral-300 text-neutral-900 placeholder:text-neutral-400'
+                        : 'bg-neutral-50 border-neutral-300 text-neutral-900 placeholder:text-neutral-400',
+                      emailSent && 'opacity-50 cursor-not-allowed'
                     )}
                   />
                   <button
                     type="submit"
-                    disabled={!input.trim() || loading}
+                    disabled={!input.trim() || loading || emailSent}
                     className="bg-cyan-500 hover:bg-cyan-400 disabled:opacity-50 disabled:cursor-not-allowed text-white p-3 rounded-xl transition-colors"
                   >
                     {loading ? (
