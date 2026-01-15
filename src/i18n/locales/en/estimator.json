@@ -1,0 +1,33 @@
+{
+  "badge": "Free AI Consultation",
+  "headline": {
+    "part1": "Bring your idea",
+    "part2": "to life"
+  },
+  "subheadline": "by chatting with us",
+  "description": "Our AI will help you structure your project, understand your needs, and estimate timelines. Then, our human team will reach out to finalize the details.",
+  "status": {
+    "aiOnline": "AI Online",
+    "humanFollowUp": "Human follow-up next"
+  },
+  "chat": {
+    "header": "Quali Consultant",
+    "subtitle": "Intelligent Virtual Assistant",
+    "placeholder": "Type your answer...",
+    "placeholderFinished": "Conversation finished",
+    "send": "Send",
+    "sendWhatsApp": "Send to WhatsApp",
+    "talkWhatsApp": "Talk now on WhatsApp"
+  },
+  "emailSent": {
+    "title": "Your information has been sent!",
+    "description": "Our team will reach out soon."
+  },
+  "emailError": "Error sending data. Click below to send via WhatsApp.",
+  "languageChanged": {
+    "title": "Language changed",
+    "description": "The conversation will restart in the new language.",
+    "confirm": "Continue",
+    "cancel": "Cancel"
+  }
+}

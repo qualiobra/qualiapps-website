@@ -3,6 +3,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
 import { useTheme } from '@/contexts/ThemeContext'
+import { useTranslation } from 'react-i18next'
 import type { Project } from '@/types'
 
 const typeIcons = {
@@ -10,13 +11,6 @@ const typeIcons = {
   mobile: Smartphone,
   system: Building2,
   fintech: CreditCard,
-}
-
-const statusLabels = {
-  completed: 'Concluído',
-  active: 'Ativo',
-  development: 'Em desenvolvimento',
-  beta: 'Beta Test',
 }
 
 const statusColors = {
@@ -34,6 +28,7 @@ interface ProjectCardProps {
 export function ProjectCard({ project, className }: ProjectCardProps) {
   const Icon = typeIcons[project.type]
   const { isDark } = useTheme()
+  const { t } = useTranslation('projects')
 
   return (
     <Card
@@ -55,7 +50,7 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
           variant="outline"
           className={cn('text-xs', statusColors[project.status])}
         >
-          {statusLabels[project.status]}
+          {t(`status.${project.status}`)}
         </Badge>
       </div>
 
@@ -113,7 +108,7 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
               rel="noopener noreferrer"
               className="mt-4 inline-flex items-center gap-1 text-primary hover:text-primary-light transition-colors text-sm"
             >
-              Ver projeto <ExternalLink className="h-4 w-4" />
+              {t('viewProject')} <ExternalLink className="h-4 w-4" />
             </a>
           )
         )}

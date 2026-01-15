@@ -1,0 +1,31 @@
+{
+  "sectionLabel": "Nossos Serviços",
+  "sectionTitle": "Expertise técnica para escalar seu negócio",
+  "sectionDescription": "Do conceito ao deploy, oferecemos todo o ciclo de desenvolvimento com tecnologias de ponta e foco na experiência do usuário.",
+  "items": {
+    "mobile": {
+      "title": "Desenvolvimento Mobile",
+      "description": "Aplicativos iOS e Android nativos ou híbridos (React Native/Flutter) com performance impecável."
+    },
+    "web": {
+      "title": "Aplicações Web",
+      "description": "Sistemas web complexos, Dashboards e SPAs utilizando React, Next.js e tecnologias modernas."
+    },
+    "design": {
+      "title": "UI/UX Design",
+      "description": "Interfaces intuitivas e centradas no usuário. Prototipação de alta fidelidade e design systems."
+    },
+    "backend": {
+      "title": "Backend & API",
+      "description": "Arquiteturas robustas, microserviços e APIs escaláveis com Node.js, Python ou Go."
+    },
+    "qa": {
+      "title": "QA & Testes",
+      "description": "Garantia de qualidade com testes automatizados e manuais para entregar software livre de bugs."
+    },
+    "consulting": {
+      "title": "Consultoria Tech",
+      "description": "Análise de viabilidade técnica, arquitetura de software e transformação digital."
+    }
+  }
+}

@@ -1,4 +1,6 @@
+import '@/i18n'
 import { ThemeProvider } from '@/contexts/ThemeContext'
+import { LanguageProvider } from '@/contexts/LanguageContext'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { WhatsAppButton } from '@/components/layout/WhatsAppButton'
@@ -15,8 +17,9 @@ import { ContactSection } from '@/components/sections/ContactSection'
 
 function App() {
   return (
-    <ThemeProvider>
-      <div className="min-h-screen theme-bg theme-text transition-colors duration-300">
+    <LanguageProvider>
+      <ThemeProvider>
+        <div className="min-h-screen theme-bg theme-text transition-colors duration-300">
         <Header />
 
         <main>
@@ -35,7 +38,8 @@ function App() {
         <Footer />
         <WhatsAppButton />
       </div>
-    </ThemeProvider>
+      </ThemeProvider>
+    </LanguageProvider>
   )
 }
 

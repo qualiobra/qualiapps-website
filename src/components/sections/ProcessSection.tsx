@@ -2,16 +2,12 @@ import { CheckCircle2, ChevronRight } from 'lucide-react'
 import { AnimatedSection } from '@/components/shared/AnimatedSection'
 import { useTheme } from '@/contexts/ThemeContext'
 import { cn } from '@/lib/utils'
-
-const processSteps = [
-  'Discovery & Planejamento Inicial',
-  'Sprints de Design e Desenvolvimento',
-  'Testes Automatizados (QA)',
-  'Deploy Contínuo e Monitoramento',
-]
+import { useTranslation } from 'react-i18next'
 
 export function ProcessSection() {
   const { isDark } = useTheme()
+  const { t } = useTranslation('process')
+  const steps = t('steps', { returnObjects: true }) as string[]
 
   return (
     <section
@@ -26,7 +22,7 @@ export function ProcessSection() {
           {/* Content */}
           <AnimatedSection direction="left">
             <span className="text-primary font-semibold uppercase tracking-wide text-sm">
-              Metodologia
+              {t('sectionLabel')}
             </span>
             <h2
               className={cn(
@@ -34,7 +30,7 @@ export function ProcessSection() {
                 isDark ? 'text-white' : 'text-neutral-900'
               )}
             >
-              Desenvolvimento Ágil e Transparente
+              {t('sectionTitle')}
             </h2>
             <p
               className={cn(
@@ -42,11 +38,11 @@ export function ProcessSection() {
                 isDark ? 'text-neutral-300' : 'text-neutral-600'
               )}
             >
-              Utilizamos Scrum e Kanban para garantir que você tenha visibilidade total do projeto. Entregas quinzenais, feedback constante e adaptação rápida.
+              {t('sectionDescription')}
             </p>
 
             <div className="space-y-4">
-              {processSteps.map((item, idx) => (
+              {steps.map((item, idx) => (
                 <div key={idx} className="flex items-center">
                   <CheckCircle2 className="text-teal-500 mr-3 h-6 w-6 shrink-0" />
                   <span
@@ -69,7 +65,7 @@ export function ProcessSection() {
                   : 'text-primary hover:text-primary-dark'
               )}
             >
-              Saiba mais sobre nosso processo <ChevronRight size={20} />
+              {t('learnMore')} <ChevronRight size={20} />
             </button>
           </AnimatedSection>
 
@@ -86,7 +82,7 @@ export function ProcessSection() {
               />
               <img
                 src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                alt="Equipe trabalhando com metodologia ágil"
+                alt={t('sectionTitle')}
                 className="relative rounded-lg shadow-xl"
               />
             </div>

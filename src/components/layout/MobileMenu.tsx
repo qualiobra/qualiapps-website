@@ -11,6 +11,7 @@ import { Logo } from '@/components/shared/Logo'
 import { NAV_LINKS } from '@/lib/constants'
 import { useTheme } from '@/contexts/ThemeContext'
 import { cn } from '@/lib/utils'
+import { useTranslation } from 'react-i18next'
 
 interface MobileMenuProps {
   open: boolean
@@ -19,6 +20,8 @@ interface MobileMenuProps {
 
 export function MobileMenu({ open, onClose }: MobileMenuProps) {
   const { isDark } = useTheme()
+  const { t } = useTranslation('navigation')
+  const { t: tCommon } = useTranslation('common')
 
   return (
     <Sheet open={open} onOpenChange={onClose}>
@@ -74,7 +77,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
                   activeClass="!text-primary bg-primary/10"
                   onClick={onClose}
                 >
-                  {link.name}
+                  {t(link.to === 'hero' ? 'home' : link.to)}
                 </Link>
               </li>
             ))}
@@ -89,7 +92,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
               onClick={onClose}
             >
               <Button className="w-full bg-primary hover:bg-primary-light text-secondary font-semibold">
-                Fale Conosco
+                {tCommon('contactUs')}
               </Button>
             </Link>
           </div>

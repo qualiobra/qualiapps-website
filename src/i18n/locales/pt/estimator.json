@@ -1,0 +1,33 @@
+{
+  "badge": "Consultoria Gratuita via IA",
+  "headline": {
+    "part1": "Tire sua ideia",
+    "part2": "do papel"
+  },
+  "subheadline": "conversando com a gente",
+  "description": "Nossa IA vai te ajudar a estruturar seu projeto, entender suas necessidades e estimar prazos. Depois, nossa equipe humana entra em contato para fechar os detalhes.",
+  "status": {
+    "aiOnline": "IA Online",
+    "humanFollowUp": "Atendimento Humano em seguida"
+  },
+  "chat": {
+    "header": "Consultor Quali",
+    "subtitle": "Assistente Virtual Inteligente",
+    "placeholder": "Digite sua resposta...",
+    "placeholderFinished": "Conversa finalizada",
+    "send": "Enviar",
+    "sendWhatsApp": "Enviar p/ WhatsApp",
+    "talkWhatsApp": "Falar agora pelo WhatsApp"
+  },
+  "emailSent": {
+    "title": "Suas informações foram enviadas!",
+    "description": "Nossa equipe entrará em contato em breve."
+  },
+  "emailError": "Erro ao enviar dados. Clique abaixo para enviar pelo WhatsApp.",
+  "languageChanged": {
+    "title": "Idioma alterado",
+    "description": "A conversa será reiniciada no novo idioma.",
+    "confirm": "Continuar",
+    "cancel": "Cancelar"
+  }
+}

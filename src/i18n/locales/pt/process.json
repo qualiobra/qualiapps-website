@@ -1,0 +1,12 @@
+{
+  "sectionLabel": "Metodologia",
+  "sectionTitle": "Desenvolvimento Ágil e Transparente",
+  "sectionDescription": "Utilizamos Scrum e Kanban para garantir que você tenha visibilidade total do projeto. Entregas quinzenais, feedback constante e adaptação rápida.",
+  "steps": [
+    "Discovery & Planejamento Inicial",
+    "Sprints de Design e Desenvolvimento",
+    "Testes Automatizados (QA)",
+    "Deploy Contínuo e Monitoramento"
+  ],
+  "learnMore": "Saiba mais sobre nosso processo"
+}

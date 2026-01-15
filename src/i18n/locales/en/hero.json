@@ -1,0 +1,27 @@
+{
+  "badge": "AI-Powered Agile Development",
+  "headline": {
+    "part1": "We turn ideas into",
+    "highlight": "digital solutions"
+  },
+  "subheadline": "Software and website development for small and medium businesses with fair prices and focus on artificial intelligence.",
+  "cta": {
+    "estimate": "Estimate my Project with AI",
+    "services": "Explore Services"
+  },
+  "features": {
+    "mobile": {
+      "title": "Mobile First",
+      "description": "Native and hybrid apps optimized for any device."
+    },
+    "web": {
+      "title": "Modern Web",
+      "description": "Scalable platforms using React, Node, and Cloud."
+    },
+    "agile": {
+      "title": "Agile Methodology",
+      "description": "Continuous delivery and fast feedback for your success."
+    }
+  },
+  "scrollIndicator": "Learn more"
+}

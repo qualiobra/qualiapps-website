@@ -1,0 +1,23 @@
+{
+  "sectionLabel": "Our Team",
+  "sectionTitle": "The people behind QualiApps",
+  "hiring": {
+    "title": "Want to join the team?",
+    "description": "We're always looking for talents passionate about technology and innovation.",
+    "cta": "Get in touch"
+  },
+  "members": {
+    "lucas": {
+      "role": "CEO & Founder",
+      "description": "Visionary behind QualiApps, passionate about innovation in construction and technology."
+    },
+    "felipe": {
+      "role": "Developer",
+      "description": "Specialist in building robust and scalable solutions."
+    },
+    "alana": {
+      "role": "Developer",
+      "description": "Focused on creating exceptional user experiences and intuitive interfaces."
+    }
+  }
+}

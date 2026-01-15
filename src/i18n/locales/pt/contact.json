@@ -1,0 +1,56 @@
+{
+  "sectionLabel": "Entre em Contato",
+  "sectionTitle": "Vamos transformar sua ideia em realidade",
+  "sectionDescription": "Preencha o formulário ou entre em contato diretamente pelos nossos canais.",
+  "form": {
+    "name": {
+      "label": "Seu nome",
+      "placeholder": "João Silva"
+    },
+    "email": {
+      "label": "Seu email",
+      "placeholder": "joao@empresa.com"
+    },
+    "phone": {
+      "label": "Seu WhatsApp",
+      "placeholder": "(69) 99999-9999"
+    },
+    "message": {
+      "label": "Sua mensagem",
+      "placeholder": "Conte-nos sobre seu projeto..."
+    },
+    "submit": "Enviar Mensagem",
+    "submitting": "Enviando...",
+    "success": {
+      "title": "Mensagem enviada!",
+      "description": "Entraremos em contato em breve."
+    },
+    "error": {
+      "title": "Erro ao enviar",
+      "description": "Tente novamente ou entre em contato pelo WhatsApp."
+    }
+  },
+  "channels": {
+    "whatsapp": {
+      "title": "WhatsApp",
+      "description": "Resposta em minutos",
+      "action": "Chamar no WhatsApp"
+    },
+    "email": {
+      "title": "Email",
+      "description": "contato@qualiapps.com.br"
+    },
+    "phone": {
+      "title": "Telefone",
+      "description": "(69) 99602-1005"
+    }
+  },
+  "location": {
+    "title": "Nossa Localização",
+    "address": "Porto Velho, RO - Brasil",
+    "mapButton": "Ver no Google Maps"
+  },
+  "tip": "Para projetos urgentes, o WhatsApp é o canal mais rápido.",
+  "responseTime": "Respondemos em até 24 horas",
+  "businessHours": "Horário comercial"
+}

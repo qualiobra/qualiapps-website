@@ -4,9 +4,11 @@ import { ArrowRight, ChevronDown, Smartphone, Code, Rocket } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useTheme } from '@/contexts/ThemeContext'
 import { cn } from '@/lib/utils'
+import { useTranslation } from 'react-i18next'
 
 export function HeroSection() {
   const { isDark } = useTheme()
+  const { t } = useTranslation('hero')
 
   return (
     <section
@@ -79,7 +81,7 @@ export function HeroSection() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
             </span>
-            Desenvolvimento Ágil com IA
+            {t('badge')}
           </motion.div>
 
           {/* Headline */}
@@ -89,8 +91,8 @@ export function HeroSection() {
               isDark ? 'text-white' : 'text-neutral-900'
             )}
           >
-            Transformamos ideias em{' '}
-            <span className="text-primary">soluções digitais</span>
+            {t('headline.part1')}{' '}
+            <span className="text-primary">{t('headline.highlight')}</span>
           </h1>
 
           {/* Subheadline */}
@@ -100,8 +102,7 @@ export function HeroSection() {
               isDark ? 'text-neutral-300' : 'text-neutral-600'
             )}
           >
-            Desenvolvimento de sistemas e websites para pequenas e médias empresas
-            com preços justos e foco em inteligência artificial.
+            {t('subheadline')}
           </p>
 
           {/* CTAs */}
@@ -116,7 +117,7 @@ export function HeroSection() {
                     : 'bg-neutral-900 text-white hover:bg-neutral-800'
                 )}
               >
-                Estimar meu Projeto com IA
+                {t('cta.estimate')}
                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
@@ -131,7 +132,7 @@ export function HeroSection() {
                     : 'border-neutral-300 text-neutral-900 hover:bg-neutral-100 hover:border-primary'
                 )}
               >
-                Conhecer Serviços
+                {t('cta.services')}
               </Button>
             </Link>
           </div>
@@ -160,10 +161,10 @@ export function HeroSection() {
                   isDark ? 'text-white' : 'text-neutral-900'
                 )}
               >
-                Mobile First
+                {t('features.mobile.title')}
               </h3>
               <p className={cn('text-sm', isDark ? 'text-neutral-400' : 'text-neutral-600')}>
-                Apps nativos e híbridos otimizados para qualquer dispositivo.
+                {t('features.mobile.description')}
               </p>
             </div>
             <div
@@ -183,10 +184,10 @@ export function HeroSection() {
                   isDark ? 'text-white' : 'text-neutral-900'
                 )}
               >
-                Web Moderna
+                {t('features.web.title')}
               </h3>
               <p className={cn('text-sm', isDark ? 'text-neutral-400' : 'text-neutral-600')}>
-                Plataformas escaláveis usando React, Node e Nuvem.
+                {t('features.web.description')}
               </p>
             </div>
             <div
@@ -206,10 +207,10 @@ export function HeroSection() {
                   isDark ? 'text-white' : 'text-neutral-900'
                 )}
               >
-                Metodologia Ágil
+                {t('features.agile.title')}
               </h3>
               <p className={cn('text-sm', isDark ? 'text-neutral-400' : 'text-neutral-600')}>
-                Entregas contínuas e feedback rápido para seu sucesso.
+                {t('features.agile.description')}
               </p>
             </div>
           </motion.div>
@@ -240,7 +241,7 @@ export function HeroSection() {
                 : 'text-neutral-400 hover:text-primary'
             )}
           >
-            <span className="text-sm mb-2">Saiba mais</span>
+            <span className="text-sm mb-2">{t('scrollIndicator')}</span>
             <ChevronDown className="h-5 w-5" />
           </motion.div>
         </Link>

@@ -1,0 +1,16 @@
+{
+  "contactUs": "Contact Us",
+  "learnMore": "Learn more",
+  "send": "Send",
+  "sending": "Sending...",
+  "success": "Success!",
+  "error": "Error",
+  "loading": "Loading...",
+  "viewMore": "View more",
+  "close": "Close",
+  "whatsappMessage": "Hi! I'd like to know more about QualiApps services.",
+  "company": {
+    "name": "QualiApps",
+    "tagline": "Agile App Development"
+  }
+}

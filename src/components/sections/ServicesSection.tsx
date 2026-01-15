@@ -3,9 +3,11 @@ import { ServiceCard } from '@/components/shared/ServiceCard'
 import { services } from '@/data/services'
 import { useTheme } from '@/contexts/ThemeContext'
 import { cn } from '@/lib/utils'
+import { useTranslation } from 'react-i18next'
 
 export function ServicesSection() {
   const { isDark } = useTheme()
+  const { t } = useTranslation('services')
 
   return (
     <section
@@ -20,7 +22,7 @@ export function ServicesSection() {
         <div className="text-center max-w-3xl mx-auto mb-16">
           <AnimatedSection>
             <span className="text-primary font-semibold uppercase tracking-wide text-sm">
-              Nossos Servicos
+              {t('sectionLabel')}
             </span>
             <h2
               className={cn(
@@ -28,7 +30,7 @@ export function ServicesSection() {
                 isDark ? 'text-white' : 'text-neutral-900'
               )}
             >
-              Expertise tecnica para escalar seu negocio
+              {t('sectionTitle')}
             </h2>
             <p
               className={cn(
@@ -36,7 +38,7 @@ export function ServicesSection() {
                 isDark ? 'text-neutral-400' : 'text-neutral-500'
               )}
             >
-              Oferecemos um ciclo completo de desenvolvimento, do design a implementacao e manutencao.
+              {t('sectionDescription')}
             </p>
           </AnimatedSection>
         </div>

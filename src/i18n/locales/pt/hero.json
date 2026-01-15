@@ -1,0 +1,27 @@
+{
+  "badge": "Desenvolvimento Ágil com IA",
+  "headline": {
+    "part1": "Transformamos ideias em",
+    "highlight": "soluções digitais"
+  },
+  "subheadline": "Desenvolvimento de sistemas e websites para pequenas e médias empresas com preços justos e foco em inteligência artificial.",
+  "cta": {
+    "estimate": "Estimar meu Projeto com IA",
+    "services": "Conhecer Serviços"
+  },
+  "features": {
+    "mobile": {
+      "title": "Mobile First",
+      "description": "Apps nativos e híbridos otimizados para qualquer dispositivo."
+    },
+    "web": {
+      "title": "Web Moderna",
+      "description": "Plataformas escaláveis usando React, Node e Nuvem."
+    },
+    "agile": {
+      "title": "Metodologia Ágil",
+      "description": "Entregas contínuas e feedback rápido para seu sucesso."
+    }
+  },
+  "scrollIndicator": "Saiba mais"
+}

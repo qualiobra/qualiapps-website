@@ -4,15 +4,19 @@ import { Menu } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Logo } from '@/components/shared/Logo'
 import { ThemeToggle } from '@/components/shared/ThemeToggle'
+import { LanguageToggle } from '@/components/shared/LanguageToggle'
 import { MobileMenu } from './MobileMenu'
 import { NAV_LINKS } from '@/lib/constants'
 import { cn } from '@/lib/utils'
 import { useTheme } from '@/contexts/ThemeContext'
+import { useTranslation } from 'react-i18next'
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const { isDark } = useTheme()
+  const { t } = useTranslation('navigation')
+  const { t: tCommon } = useTranslation('common')
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50)
@@ -59,7 +63,7 @@ export function Header() {
                 )}
                 activeClass="!text-primary"
               >
-                {link.name}
+                {t(link.to === 'hero' ? 'home' : link.to)}
               </Link>
             </li>
           ))}
@@ -67,6 +71,7 @@ export function Header() {
 
         {/* Actions - Desktop */}
         <div className="hidden md:flex items-center gap-2">
+          <LanguageToggle />
           <ThemeToggle />
           <Link
             to="contact"
@@ -75,13 +80,14 @@ export function Header() {
             duration={500}
           >
             <Button className="bg-primary hover:bg-primary-light text-secondary font-semibold">
-              Fale Conosco
+              {tCommon('contactUs')}
             </Button>
           </Link>
         </div>
 
         {/* Mobile Actions */}
         <div className="flex md:hidden items-center gap-2">
+          <LanguageToggle />
           <ThemeToggle />
           <Button
             variant="ghost"

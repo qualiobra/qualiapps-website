@@ -13,6 +13,7 @@ import {
 import { Card, CardContent } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 import { useTheme } from '@/contexts/ThemeContext'
+import { useTranslation } from 'react-i18next'
 import type { Service } from '@/types'
 
 const iconMap: Record<string, LucideIcon> = {
@@ -45,6 +46,7 @@ export function ServiceCard({ service, className }: ServiceCardProps) {
   const Icon = iconMap[service.icon] || Globe
   const color = colorMap[service.color || 'cyan'] || colorMap.cyan
   const { isDark } = useTheme()
+  const { t } = useTranslation('services')
 
   return (
     <Card
@@ -72,7 +74,7 @@ export function ServiceCard({ service, className }: ServiceCardProps) {
             isDark ? 'text-white' : 'text-neutral-900'
           )}
         >
-          {service.title}
+          {t(`items.${service.id}.title`)}
         </h3>
         <p
           className={cn(
@@ -80,7 +82,7 @@ export function ServiceCard({ service, className }: ServiceCardProps) {
             isDark ? 'text-neutral-400' : 'text-neutral-500'
           )}
         >
-          {service.description}
+          {t(`items.${service.id}.description`)}
         </p>
       </CardContent>
     </Card>

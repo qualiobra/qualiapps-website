@@ -1,0 +1,37 @@
+{
+  "sectionLabel": "Our Story",
+  "headline": {
+    "part1": "Born from the field,",
+    "part2": "built for the",
+    "highlight": "digital future"
+  },
+  "description1": "Founded in 2025 by Lucas Araújo, QualiApps emerged from a real need at construction sites. The dream started with <strong>QualiObra</strong>, a gamified system where the AI \"Quali\" evaluates safety and quality through photos sent by workers.",
+  "description2": "Using advanced AI tools to accelerate learning and development, we realized we could do more. Our mission today is clear: offer high-level systems and websites for small and medium businesses at a fair price, generating real engagement through technology.",
+  "card": {
+    "label": "Innovation",
+    "text": "AI + Construction"
+  },
+  "values": {
+    "title": "Our Values",
+    "subtitle": "The culture that drives us every day.",
+    "faith": {
+      "title": "Faith in God",
+      "description": "Our non-negotiable foundation. We believe that work done with purpose, ethics, and gratitude bears fruit that goes beyond code."
+    },
+    "truth": {
+      "title": "Truth",
+      "description": "Radical transparency with clients. No fine print. We deliver what we promise, with honesty about deadlines and costs."
+    },
+    "design": {
+      "title": "Design",
+      "description": "Functionality doesn't exist without beauty. We create interfaces that delight and provide a smooth, modern user experience."
+    }
+  },
+  "projects": {
+    "corporateClient": "Corporate Client",
+    "industry": "Industry",
+    "construction": "Construction",
+    "ownProduct": "Own Product (AI)",
+    "fintech": "Fintech (Coming soon)"
+  }
+}

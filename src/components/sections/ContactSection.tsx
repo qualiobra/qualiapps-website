@@ -13,44 +13,46 @@ import { COMPANY, WHATSAPP_URL } from '@/lib/constants'
 import { useTheme } from '@/contexts/ThemeContext'
 import { cn } from '@/lib/utils'
 import { contactSchema, ContactFormData } from '@/lib/validation'
-
-const contactMethods = [
-  {
-    id: 'whatsapp',
-    icon: MessageCircle,
-    label: 'WhatsApp',
-    value: COMPANY.phone,
-    description: 'Resposta em minutos',
-    href: WHATSAPP_URL,
-    highlighted: true,
-    color: 'whatsapp',
-  },
-  {
-    id: 'email',
-    icon: Mail,
-    label: 'Email',
-    value: COMPANY.email,
-    description: 'Para propostas formais',
-    href: `mailto:${COMPANY.email}`,
-    highlighted: false,
-    color: 'primary',
-  },
-  {
-    id: 'phone',
-    icon: Phone,
-    label: 'Telefone',
-    value: COMPANY.phone,
-    description: 'Horário comercial',
-    href: `tel:+55${COMPANY.phone.replace(/\D/g, '')}`,
-    highlighted: false,
-    color: 'primary',
-  },
-]
+import { useTranslation } from 'react-i18next'
 
 export function ContactSection() {
   const { isDark } = useTheme()
+  const { t } = useTranslation('contact')
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [focusedField, setFocusedField] = useState<string | null>(null)
+
+  const contactMethods = [
+    {
+      id: 'whatsapp',
+      icon: MessageCircle,
+      label: t('channels.whatsapp.title'),
+      value: COMPANY.phone,
+      description: t('channels.whatsapp.description'),
+      href: WHATSAPP_URL,
+      highlighted: true,
+      color: 'whatsapp',
+    },
+    {
+      id: 'email',
+      icon: Mail,
+      label: t('channels.email.title'),
+      value: COMPANY.email,
+      description: t('channels.email.description'),
+      href: `mailto:${COMPANY.email}`,
+      highlighted: false,
+      color: 'primary',
+    },
+    {
+      id: 'phone',
+      icon: Phone,
+      label: t('channels.phone.title'),
+      value: COMPANY.phone,
+      description: t('businessHours'),
+      href: `tel:+55${COMPANY.phone.replace(/\D/g, '')}`,
+      highlighted: false,
+      color: 'primary',
+    },
+  ]
 
   const {
     register,
@@ -89,7 +91,7 @@ export function ContactSection() {
       setSubmitStatus('success')
       reset()
     } catch (error) {
-      console.error('Erro ao enviar email:', error)
+      console.error('Error sending email:', error)
       setSubmitStatus('error')
     }
   }
@@ -138,8 +140,8 @@ export function ContactSection() {
 
       <div className="container relative mx-auto px-4">
         <SectionTitle
-          title="Entre em Contato"
-          subtitle="Vamos transformar sua ideia em realidade"
+          title={t('sectionLabel')}
+          subtitle={t('sectionTitle')}
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 max-w-6xl mx-auto">
@@ -170,7 +172,7 @@ export function ContactSection() {
                       isDark ? 'text-white' : 'text-neutral-900'
                     )}
                   >
-                    Envie sua mensagem
+                    {t('form.name.label').replace('Your ', '').replace('Seu ', '') === 'name' ? t('form.submit').replace('Send ', '').replace('Enviar ', '') + ' ' + t('form.message.label').toLowerCase() : t('form.message.label')}
                   </h3>
                   <p
                     className={cn(
@@ -178,7 +180,7 @@ export function ContactSection() {
                       isDark ? 'text-neutral-400' : 'text-neutral-500'
                     )}
                   >
-                    Respondemos em ate 24 horas
+                    {t('responseTime')}
                   </p>
                 </div>
               </div>
@@ -194,7 +196,7 @@ export function ContactSection() {
                       register('name').onBlur(e)
                     }}
                     className={cn(inputBaseClasses, errors.name && 'border-red-500')}
-                    placeholder="Nome"
+                    placeholder={t('form.name.placeholder')}
                   />
                   <label
                     className={cn(
@@ -204,7 +206,7 @@ export function ContactSection() {
                         : 'top-1/2 -translate-y-1/2 text-base'
                     )}
                   >
-                    Seu nome
+                    {t('form.name.label')}
                   </label>
                   {errors.name && (
                     <motion.p
@@ -231,7 +233,7 @@ export function ContactSection() {
                         register('email').onBlur(e)
                       }}
                       className={cn(inputBaseClasses, errors.email && 'border-red-500')}
-                      placeholder="Email"
+                      placeholder={t('form.email.placeholder')}
                     />
                     <label
                       className={cn(
@@ -241,7 +243,7 @@ export function ContactSection() {
                           : 'top-1/2 -translate-y-1/2 text-base'
                       )}
                     >
-                      Seu email
+                      {t('form.email.label')}
                     </label>
                     {errors.email && (
                       <motion.p
@@ -266,7 +268,7 @@ export function ContactSection() {
                         register('whatsapp').onBlur(e)
                       }}
                       className={cn(inputBaseClasses, errors.whatsapp && 'border-red-500')}
-                      placeholder="WhatsApp"
+                      placeholder={t('form.phone.placeholder')}
                     />
                     <label
                       className={cn(
@@ -276,7 +278,7 @@ export function ContactSection() {
                           : 'top-1/2 -translate-y-1/2 text-base'
                       )}
                     >
-                      Seu WhatsApp
+                      {t('form.phone.label')}
                     </label>
                     {errors.whatsapp && (
                       <motion.p
@@ -310,7 +312,7 @@ export function ContactSection() {
                       'focus:border-primary focus:ring-2 focus:ring-primary/20',
                       errors.message && 'border-red-500'
                     )}
-                    placeholder="Mensagem"
+                    placeholder={t('form.message.placeholder')}
                   />
                   <label
                     className={cn(
@@ -320,7 +322,7 @@ export function ContactSection() {
                         : 'top-5 text-base'
                     )}
                   >
-                    Sua mensagem
+                    {t('form.message.label')}
                   </label>
                   {errors.message && (
                     <motion.p
@@ -353,11 +355,11 @@ export function ContactSection() {
                         transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
                         className="w-5 h-5 border-2 border-secondary/30 border-t-secondary rounded-full"
                       />
-                      Enviando...
+                      {t('form.submitting')}
                     </span>
                   ) : (
                     <span className="flex items-center gap-2">
-                      Enviar Mensagem
+                      {t('form.submit')}
                       <Send className="w-5 h-5" />
                     </span>
                   )}
@@ -374,9 +376,9 @@ export function ContactSection() {
                       <CheckCircle className="w-5 h-5 text-green-500" />
                     </div>
                     <div>
-                      <p className="font-semibold text-green-500">Mensagem enviada!</p>
+                      <p className="font-semibold text-green-500">{t('form.success.title')}</p>
                       <p className={cn('text-sm', isDark ? 'text-neutral-400' : 'text-neutral-500')}>
-                        Entraremos em contato em breve.
+                        {t('form.success.description')}
                       </p>
                     </div>
                   </motion.div>
@@ -392,9 +394,9 @@ export function ContactSection() {
                       <AlertCircle className="w-5 h-5 text-red-500" />
                     </div>
                     <div>
-                      <p className="font-semibold text-red-500">Erro ao enviar</p>
+                      <p className="font-semibold text-red-500">{t('form.error.title')}</p>
                       <p className={cn('text-sm', isDark ? 'text-neutral-400' : 'text-neutral-500')}>
-                        Tente novamente ou use outro canal.
+                        {t('form.error.description')}
                       </p>
                     </div>
                   </motion.div>
@@ -419,9 +421,7 @@ export function ContactSection() {
                     isDark ? 'text-neutral-300' : 'text-neutral-600'
                   )}
                 >
-                  <span className="font-bold text-primary">Dica:</span>{' '}
-                  Para projetos urgentes, o WhatsApp e o canal mais rapido.
-                  Respondemos em ate 24h por email.
+                  {t('tip')}
                 </p>
               </motion.div>
             </div>
@@ -480,7 +480,7 @@ export function ContactSection() {
                           </h4>
                           {isHighlighted && (
                             <span className="px-2 py-0.5 text-xs font-bold rounded-full bg-whatsapp/20 text-whatsapp">
-                              Rapido
+                              {t('channels.whatsapp.action').split(' ')[0]}
                             </span>
                           )}
                         </div>
@@ -541,7 +541,7 @@ export function ContactSection() {
                         isDark ? 'text-white' : 'text-neutral-900'
                       )}
                     >
-                      Nossa Localizacao
+                      {t('location.title')}
                     </h4>
                     <address
                       className={cn(
@@ -573,7 +573,7 @@ export function ContactSection() {
                   )}
                 >
                   <MapPin className="w-4 h-4" />
-                  Ver no Google Maps
+                  {t('location.mapButton')}
                 </a>
               </motion.div>
             </div>

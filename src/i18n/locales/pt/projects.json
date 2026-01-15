@@ -1,0 +1,35 @@
+{
+  "sectionLabel": "Portfólio",
+  "sectionTitle": "Conheça alguns dos nossos trabalhos",
+  "categories": {
+    "all": "Todos",
+    "webapps": "WebApps",
+    "websites": "Websites"
+  },
+  "status": {
+    "development": "Em desenvolvimento",
+    "beta": "Beta Test",
+    "completed": "Concluído"
+  },
+  "viewProject": "Ver projeto",
+  "items": {
+    "qualiobra": {
+      "description": "Sistema gamificado de gestão da qualidade para construção civil. Trabalhadores ganham pontos por conformidade de qualidade e uso de EPI/EPC. Chat com IA (Quali) para validação de serviços através de imagens e vídeos."
+    },
+    "qualiclub": {
+      "description": "Projeto fintech para o setor de construção civil. Soluções financeiras inovadoras para construtoras e trabalhadores."
+    },
+    "qualibroker": {
+      "description": "Aplicativo de gestão de vendas inteligente para construtoras, incorporadoras e corretores de imóveis. Verifique unidades disponíveis, faça simulações e reserve unidades."
+    },
+    "engeral": {
+      "description": "Site institucional moderno para construtora, destacando projetos e expertise em construção civil."
+    },
+    "casa-facil": {
+      "description": "Site para indústria de fabricação de blocos de concreto estrutural, com catálogo de produtos e contato."
+    },
+    "araujo-empreendimentos": {
+      "description": "Site institucional para incorporadora, apresentando empreendimentos e oportunidades de investimento."
+    }
+  }
+}

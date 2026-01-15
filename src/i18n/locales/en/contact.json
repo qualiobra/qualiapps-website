@@ -1,0 +1,56 @@
+{
+  "sectionLabel": "Get in Touch",
+  "sectionTitle": "Let's turn your idea into reality",
+  "sectionDescription": "Fill out the form or contact us directly through our channels.",
+  "form": {
+    "name": {
+      "label": "Your name",
+      "placeholder": "John Smith"
+    },
+    "email": {
+      "label": "Your email",
+      "placeholder": "john@company.com"
+    },
+    "phone": {
+      "label": "Your WhatsApp",
+      "placeholder": "(69) 99999-9999"
+    },
+    "message": {
+      "label": "Your message",
+      "placeholder": "Tell us about your project..."
+    },
+    "submit": "Send Message",
+    "submitting": "Sending...",
+    "success": {
+      "title": "Message sent!",
+      "description": "We'll get back to you soon."
+    },
+    "error": {
+      "title": "Error sending",
+      "description": "Please try again or contact us via WhatsApp."
+    }
+  },
+  "channels": {
+    "whatsapp": {
+      "title": "WhatsApp",
+      "description": "Response in minutes",
+      "action": "Message on WhatsApp"
+    },
+    "email": {
+      "title": "Email",
+      "description": "contato@qualiapps.com.br"
+    },
+    "phone": {
+      "title": "Phone",
+      "description": "(69) 99602-1005"
+    }
+  },
+  "location": {
+    "title": "Our Location",
+    "address": "Porto Velho, RO - Brazil",
+    "mapButton": "View on Google Maps"
+  },
+  "tip": "For urgent projects, WhatsApp is the fastest channel.",
+  "responseTime": "We respond within 24 hours",
+  "businessHours": "Business hours"
+}

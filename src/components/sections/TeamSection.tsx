@@ -1,12 +1,19 @@
 import { SectionTitle } from '@/components/shared/SectionTitle'
 import { AnimatedSection } from '@/components/shared/AnimatedSection'
 import { TeamCard } from '@/components/shared/TeamCard'
-import { team } from '@/data/team'
 import { useTheme } from '@/contexts/ThemeContext'
 import { cn } from '@/lib/utils'
+import { useTranslation } from 'react-i18next'
+
+const teamConfig = [
+  { id: 'lucas', name: 'Lucas Araújo', image: '/lucas.png' },
+  { id: 'felipe', name: 'Felipe Trindade', image: '/felipe.jpeg' },
+  { id: 'alana', name: 'Alana Caled', image: '/alana.jpeg' },
+]
 
 export function TeamSection() {
   const { isDark } = useTheme()
+  const { t } = useTranslation('team')
 
   return (
     <section
@@ -18,14 +25,21 @@ export function TeamSection() {
     >
       <div className="container mx-auto px-4">
         <SectionTitle
-          title="Nossa Equipe"
-          subtitle="As pessoas por trás da QualiApps"
+          title={t('sectionLabel')}
+          subtitle={t('sectionTitle')}
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
-          {team.map((member, index) => (
+          {teamConfig.map((member, index) => (
             <AnimatedSection key={member.id} delay={index * 0.1}>
-              <TeamCard member={member} className="h-full" />
+              <TeamCard
+                member={{
+                  ...member,
+                  role: t(`members.${member.id}.role`),
+                  description: t(`members.${member.id}.description`),
+                }}
+                className="h-full"
+              />
             </AnimatedSection>
           ))}
         </div>
@@ -46,7 +60,7 @@ export function TeamSection() {
                 isDark ? 'text-white' : 'text-neutral-900'
               )}
             >
-              Quer fazer parte do time?
+              {t('hiring.title')}
             </h3>
             <p
               className={cn(
@@ -54,13 +68,13 @@ export function TeamSection() {
                 isDark ? 'text-neutral-400' : 'text-neutral-600'
               )}
             >
-              Estamos sempre em busca de talentos apaixonados por tecnologia.
+              {t('hiring.description')}
             </p>
             <a
               href="mailto:contato@qualiapps.com.br?subject=Quero fazer parte do time"
               className="inline-flex items-center text-primary hover:text-primary-light font-medium transition-colors"
             >
-              Entre em contato
+              {t('hiring.cta')}
             </a>
           </div>
         </AnimatedSection>

@@ -1,15 +1,17 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'motion/react'
 import ReactMarkdown from 'react-markdown'
-import { startChat, sendMessage } from '@/services/geminiService'
+import { startChat, sendMessage, resetChat } from '@/services/geminiService'
 import { Sparkles, Send, MessageSquare, Smartphone, Loader2, CheckCircle, AlertCircle, MessageCircle } from 'lucide-react'
 import { AnimatedSection } from '@/components/shared/AnimatedSection'
 import { WHATSAPP_NUMBER } from '@/lib/constants'
 import { useTheme } from '@/contexts/ThemeContext'
+import { useLanguage } from '@/contexts/LanguageContext'
 import { cn } from '@/lib/utils'
 import { isSummaryResponse } from '@/lib/summaryDetector'
 import { extractLeadData } from '@/lib/leadExtractor'
 import { sendLeadEmail } from '@/services/emailLeadService'
+import { useTranslation } from 'react-i18next'
 
 interface Message {
   id: number
@@ -26,16 +28,41 @@ export function EstimatorSection() {
   const [emailError, setEmailError] = useState<string | null>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
   const { isDark } = useTheme()
+  const { language } = useLanguage()
+  const { t } = useTranslation('estimator')
+  const previousLanguageRef = useRef(language)
 
+  // Initialize chat
+  const initChat = async (lang: typeof language) => {
+    setLoading(true)
+    resetChat()
+    const initialResponse = await startChat(lang)
+    setMessages([{ id: 1, text: initialResponse, sender: 'ai' }])
+    setLoading(false)
+    setEmailSent(false)
+    setEmailError(null)
+  }
+
+  // Initial load
   useEffect(() => {
-    const initChat = async () => {
-      setLoading(true)
-      const initialResponse = await startChat()
-      setMessages([{ id: 1, text: initialResponse, sender: 'ai' }])
-      setLoading(false)
-    }
-    initChat()
+    initChat(language)
   }, [])
+
+  // Detect language change and restart chat
+  useEffect(() => {
+    if (previousLanguageRef.current !== language) {
+      previousLanguageRef.current = language
+      // Only restart if there's an ongoing conversation (more than initial message)
+      if (messages.length > 1 && !emailSent) {
+        // Show a system message about language change
+        const langChangeMsg = language === 'en'
+          ? 'Language changed. Restarting conversation...'
+          : 'Idioma alterado. Reiniciando conversa...'
+        setMessages([{ id: Date.now(), text: langChangeMsg, sender: 'ai' }])
+      }
+      initChat(language)
+    }
+  }, [language])
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -80,7 +107,11 @@ export function EstimatorSection() {
       .map((m) => `${m.sender === 'ai' ? 'Quali IA' : 'Cliente'}: ${m.text}`)
       .join('\n\n')
 
-    const text = `*Olá! Gostaria de um orçamento para meu projeto.*\n\nConversei com a IA no site e aqui está o resumo da minha ideia:\n\n${conversation}`
+    const introText = language === 'en'
+      ? "*Hello! I'd like a quote for my project.*\n\nI chatted with the AI on the site and here's the summary of my idea:"
+      : '*Olá! Gostaria de um orçamento para meu projeto.*\n\nConversei com a IA no site e aqui está o resumo da minha ideia:'
+
+    const text = `${introText}\n\n${conversation}`
     const encoded = encodeURIComponent(text)
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`, '_blank')
   }
@@ -120,12 +151,12 @@ export function EstimatorSection() {
               )}
             >
               <Sparkles size={16} className="mr-2" />
-              Consultoria Gratuita via IA
+              {t('badge')}
             </div>
             <h2 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
-              Tire sua ideia do papel <br />
+              {t('headline.part1')} {t('headline.part2')} <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-teal-400">
-                conversando com a gente.
+                {t('subheadline')}
               </span>
             </h2>
             <p
@@ -134,9 +165,7 @@ export function EstimatorSection() {
                 isDark ? 'text-neutral-400' : 'text-neutral-600'
               )}
             >
-              Nossa IA especializada vai entender o escopo do seu projeto, funcionalidades e
-              objetivos. Ao final, você envia o resumo pronto para nosso WhatsApp e recebe um
-              atendimento prioritário.
+              {t('description')}
             </p>
 
             <div
@@ -147,7 +176,7 @@ export function EstimatorSection() {
             >
               <div className="flex items-center">
                 <div className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse" />
-                IA Online
+                {t('status.aiOnline')}
               </div>
               <div
                 className={cn(
@@ -155,7 +184,7 @@ export function EstimatorSection() {
                   isDark ? 'bg-neutral-700' : 'bg-neutral-300'
                 )}
               />
-              <span className="hidden md:block">Atendimento Humano em seguida</span>
+              <span className="hidden md:block">{t('status.humanFollowUp')}</span>
             </div>
           </AnimatedSection>
 
@@ -185,20 +214,24 @@ export function EstimatorSection() {
                         isDark ? 'text-white' : 'text-neutral-900'
                       )}
                     >
-                      Consultor Quali
+                      {t('chat.header')}
                     </h4>
-                    <p className="text-xs text-cyan-500">Assistente Virtual Inteligente</p>
+                    <p className="text-xs text-cyan-500">{t('chat.subtitle')}</p>
                   </div>
                 </div>
                 {emailSent ? (
                   <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-green-500/10 border border-green-500/30">
                     <CheckCircle size={14} className="text-green-500" />
-                    <span className="text-green-500 text-xs font-bold">Enviado!</span>
+                    <span className="text-green-500 text-xs font-bold">
+                      {language === 'en' ? 'Sent!' : 'Enviado!'}
+                    </span>
                   </div>
                 ) : emailSending ? (
                   <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-cyan-500/10 border border-cyan-500/30">
                     <Loader2 size={14} className="text-cyan-500 animate-spin" />
-                    <span className="text-cyan-500 text-xs font-bold">Enviando...</span>
+                    <span className="text-cyan-500 text-xs font-bold">
+                      {language === 'en' ? 'Sending...' : 'Enviando...'}
+                    </span>
                   </div>
                 ) : (
                   <button
@@ -206,7 +239,7 @@ export function EstimatorSection() {
                     className="bg-green-600 hover:bg-green-500 text-white text-xs font-bold py-2 px-3 rounded-lg flex items-center transition-colors"
                   >
                     <Smartphone size={14} className="mr-1" />
-                    Enviar p/ WhatsApp
+                    {t('chat.sendWhatsApp')}
                   </button>
                 )}
               </div>
@@ -297,10 +330,10 @@ export function EstimatorSection() {
                       </div>
                       <div>
                         <p className="font-semibold text-green-500">
-                          Suas informações foram enviadas!
+                          {t('emailSent.title')}
                         </p>
                         <p className={cn('text-sm', isDark ? 'text-neutral-400' : 'text-neutral-500')}>
-                          Nossa equipe entrará em contato pelo WhatsApp informado.
+                          {t('emailSent.description')}
                         </p>
                       </div>
                     </div>
@@ -311,7 +344,7 @@ export function EstimatorSection() {
                       className="mt-4 w-full bg-green-600 hover:bg-green-500 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-colors"
                     >
                       <MessageCircle size={18} />
-                      Falar agora pelo WhatsApp
+                      {t('chat.talkWhatsApp')}
                     </button>
                   </motion.div>
                 )}
@@ -326,9 +359,11 @@ export function EstimatorSection() {
                     <div className="flex items-center gap-3">
                       <AlertCircle className="w-5 h-5 text-red-500" />
                       <div>
-                        <p className="font-semibold text-red-500">Erro ao enviar</p>
+                        <p className="font-semibold text-red-500">
+                          {language === 'en' ? 'Error sending' : 'Erro ao enviar'}
+                        </p>
                         <p className={cn('text-sm', isDark ? 'text-neutral-400' : 'text-neutral-500')}>
-                          Use o botão WhatsApp para garantir o contato.
+                          {t('emailError')}
                         </p>
                       </div>
                     </div>
@@ -337,7 +372,7 @@ export function EstimatorSection() {
                       className="mt-3 w-full bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors"
                     >
                       <Smartphone size={16} />
-                      Enviar pelo WhatsApp
+                      {t('chat.sendWhatsApp')}
                     </button>
                   </motion.div>
                 )}
@@ -362,7 +397,7 @@ export function EstimatorSection() {
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     disabled={emailSent}
-                    placeholder={emailSent ? 'Conversa finalizada' : 'Digite sua resposta...'}
+                    placeholder={emailSent ? t('chat.placeholderFinished') : t('chat.placeholder')}
                     className={cn(
                       'flex-1 border rounded-xl px-4 py-3 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all',
                       isDark

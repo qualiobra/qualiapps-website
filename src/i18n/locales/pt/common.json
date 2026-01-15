@@ -1,0 +1,16 @@
+{
+  "contactUs": "Fale Conosco",
+  "learnMore": "Saiba mais",
+  "send": "Enviar",
+  "sending": "Enviando...",
+  "success": "Sucesso!",
+  "error": "Erro",
+  "loading": "Carregando...",
+  "viewMore": "Ver mais",
+  "close": "Fechar",
+  "whatsappMessage": "Olá! Gostaria de saber mais sobre os serviços da QualiApps.",
+  "company": {
+    "name": "QualiApps",
+    "tagline": "Desenvolvimento Ágil de Aplicativos"
+  }
+}

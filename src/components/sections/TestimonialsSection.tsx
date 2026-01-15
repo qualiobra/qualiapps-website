@@ -1,11 +1,25 @@
 import { Quote } from 'lucide-react'
 import { AnimatedSection } from '@/components/shared/AnimatedSection'
-import { testimonials } from '@/data/testimonials'
 import { useTheme } from '@/contexts/ThemeContext'
 import { cn } from '@/lib/utils'
+import { useTranslation } from 'react-i18next'
+
+const testimonialsConfig = [
+  {
+    id: 'thiago-muzuco',
+    name: 'Thiago Muzuco',
+    image: 'https://ui-avatars.com/api/?name=Thiago+Muzuco&background=random',
+  },
+  {
+    id: 'felipe-araujo',
+    name: 'Felipe Araújo',
+    image: 'https://ui-avatars.com/api/?name=Felipe+Araujo&background=random',
+  },
+]
 
 export function TestimonialsSection() {
   const { isDark } = useTheme()
+  const { t } = useTranslation('testimonials')
 
   return (
     <section
@@ -23,7 +37,7 @@ export function TestimonialsSection() {
               isDark ? 'text-white' : 'text-neutral-900'
             )}
           >
-            O que dizem nossos parceiros
+            {t('sectionTitle')}
           </h2>
           <p
             className={cn(
@@ -31,13 +45,13 @@ export function TestimonialsSection() {
               isDark ? 'text-neutral-400' : 'text-neutral-500'
             )}
           >
-            Resultados reais para empresas reais.
+            {t('sectionSubtitle')}
           </p>
         </AnimatedSection>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          {testimonials.map((t, i) => (
-            <AnimatedSection key={i} delay={i * 0.1}>
+          {testimonialsConfig.map((testimonial, i) => (
+            <AnimatedSection key={testimonial.id} delay={i * 0.1}>
               <div
                 className={cn(
                   'p-8 rounded-2xl transition-all duration-300 border relative h-full',
@@ -58,12 +72,12 @@ export function TestimonialsSection() {
                     isDark ? 'text-neutral-300' : 'text-neutral-600'
                   )}
                 >
-                  "{t.content}"
+                  "{t(`items.${testimonial.id}.content`)}"
                 </p>
                 <div className="flex items-center">
                   <img
-                    src={t.image}
-                    alt={t.name}
+                    src={testimonial.image}
+                    alt={testimonial.name}
                     className="w-12 h-12 rounded-full mr-4"
                   />
                   <div>
@@ -73,7 +87,7 @@ export function TestimonialsSection() {
                         isDark ? 'text-white' : 'text-neutral-900'
                       )}
                     >
-                      {t.name}
+                      {testimonial.name}
                     </h4>
                     <p
                       className={cn(
@@ -81,7 +95,7 @@ export function TestimonialsSection() {
                         isDark ? 'text-neutral-400' : 'text-neutral-500'
                       )}
                     >
-                      {t.role}
+                      {t(`items.${testimonial.id}.role`)}
                     </p>
                   </div>
                 </div>

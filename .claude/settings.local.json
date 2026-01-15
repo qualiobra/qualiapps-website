@@ -19,7 +19,21 @@
       "Bash(git -C \"c:/Users/lucas/qualiapps\" commit -m \"$\\(cat <<''EOF''\nfeat: implementa sistema de toggle de tema dark/light\n\n- Cria ThemeContext para gerenciar estado global do tema\n- Adiciona ThemeToggle com animação suave entre ícones Sol/Lua\n- Define variáveis CSS para ambos os temas \\(dark e light\\)\n- Atualiza todos os componentes para usar useTheme\\(\\) e classes condicionais\n- Logo \"quali\" muda de branco para preto no tema claro\n- Persiste preferência do usuário no localStorage\n- Detecta preferência do sistema \\(prefers-color-scheme\\)\n- Transições suaves de 300ms em todas as mudanças de tema\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
       "Bash(git -C \"c:/Users/lucas/qualiapps\" push origin master)",
       "Bash(git -C \"c:/Users/lucas/qualiapps\" commit -m \"$\\(cat <<''EOF''\nfeat: adiciona imagens locais da equipe e seção nossa história\n\n- Lucas Araújo: /lucas.png\n- Felipe Trindade: /felipe.jpeg\n- Alana Caled: /alana.jpeg\n- Seção Nossa História: /nossa-historia.png\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
-      "Bash(git -C \"c:/Users/lucas/qualiapps\" commit -m \"$\\(cat <<''EOF''\nfix: traduz mensagens de validação do formulário para português\n\n- Adiciona defaultValues para evitar erro \"expected string, received undefined\"\n- Mensagens de erro em PT-BR: nome, email e mensagem obrigatórios\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
+      "Bash(git -C \"c:/Users/lucas/qualiapps\" commit -m \"$\\(cat <<''EOF''\nfix: traduz mensagens de validação do formulário para português\n\n- Adiciona defaultValues para evitar erro \"expected string, received undefined\"\n- Mensagens de erro em PT-BR: nome, email e mensagem obrigatórios\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git -C \"c:/Users/lucas/qualiapps\" status)",
+      "Bash(git -C \"c:/Users/lucas/qualiapps\" add docs/diario.md package-lock.json package.json src/components/sections/ContactSection.tsx)",
+      "Bash(git -C \"c:/Users/lucas/qualiapps\" commit -m \"$\\(cat <<''EOF''\nfeat: implementa formulário de contato funcional com EmailJS\n\n- Integra EmailJS para envio real de emails para contato@qualiapps.com.br\n- Altera campo telefone para WhatsApp \\(agora obrigatório\\)\n- Corrige mensagens de validação para português \\(elimina \"Invalid input\"\\)\n- Adiciona feedback visual de sucesso/erro após envio\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git -C \"c:/Users/lucas/qualiapps\" add src/components/sections/ContactSection.tsx)",
+      "Bash(git -C \"c:/Users/lucas/qualiapps\" commit -m \"$\\(cat <<''EOF''\nfix: corrige validação do formulário que mostrava erro em campos preenchidos\n\n- Remove { message: ''...'' } do z.string\\(\\) que sobrescrevia todas as validações\n- Usa apenas .min\\(1, ''...''\\) para validação de campo obrigatório\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git -C \"c:/Users/lucas/qualiapps\" add docs/diario.md)",
+      "Bash(git -C \"c:/Users/lucas/qualiapps\" commit -m \"docs: documenta bug do Zod v4 e solução no diário\")",
+      "Bash(npm run test:run:*)",
+      "Bash(node -e:*)",
+      "Bash(npx vitest:*)",
+      "Bash(npm ls:*)",
+      "Bash(npx tsx:*)",
+      "Skill(frontend-design)",
+      "Skill(frontend-design:*)"
     ]
   }
 }

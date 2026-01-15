@@ -830,6 +830,102 @@ Melhorias na funcionalidade do chat com IA: renderização de markdown, bloqueio
 
 ---
 
+## 15 de Janeiro de 2026 (Sessão 14)
+
+### O que foi feito
+Implementação completa de sistema de internacionalização (i18n) com toggle de idioma Português/Inglês.
+
+#### Infraestrutura de Tradução
+- **Biblioteca:** i18next + react-i18next
+- **Persistência:** localStorage (`qualiapps-language`)
+- **Detecção:** Padrão português, com opção de trocar para inglês
+
+#### Arquivos de Configuração Criados
+- `src/i18n/index.ts` - Configuração central do i18next
+- `src/contexts/LanguageContext.tsx` - Contexto React (seguindo padrão do ThemeContext)
+- `src/components/shared/LanguageToggle.tsx` - Botão PT/EN
+
+#### Arquivos de Tradução (13 namespaces por idioma)
+Criados em `src/i18n/locales/{pt,en}/`:
+- `common.json` - Botões e labels gerais
+- `navigation.json` - Links de navegação
+- `hero.json` - Seção Hero
+- `services.json` - Seção Serviços
+- `about.json` - Seção Sobre
+- `contact.json` - Seção Contato
+- `estimator.json` - UI do Chat com IA
+- `team.json` - Seção Equipe
+- `projects.json` - Seção Projetos
+- `process.json` - Seção Processo
+- `qualiobra.json` - Seção QualiObra
+- `testimonials.json` - Seção Depoimentos
+- `footer.json` - Rodapé
+- `aiPrompt.ts` - Prompt da IA (PT e EN)
+
+#### IA Bilíngue - Solução Implementada
+1. **Prompts separados:** `AI_SYSTEM_PROMPT_PT` e `AI_SYSTEM_PROMPT_EN`
+2. **geminiService.ts:** Aceita parâmetro `language` no `startChat()`
+3. **summaryDetector.ts:** Keywords em ambos idiomas para detectar resumo
+4. **Reinício do chat:** Ao mudar idioma, mostra aviso e reinicia conversa
+
+#### Componentes Atualizados com `useTranslation()`
+- `Header.tsx` - Toggle no header + navegação traduzida
+- `MobileMenu.tsx` - Toggle no menu + navegação traduzida
+- `Footer.tsx` - Links e textos traduzidos
+- `HeroSection.tsx` - Todos os textos traduzidos
+- `ServicesSection.tsx` - Títulos e descrições
+- `ServiceCard.tsx` - Cards de serviço
+- `EstimatorSection.tsx` - UI do chat + detecção de idioma
+
+#### Comportamento do Chat ao Mudar Idioma
+1. Detecta mudança via `useEffect` comparando `previousLanguageRef`
+2. Mostra mensagem: "Idioma alterado. Reiniciando conversa..." / "Language changed. Restarting conversation..."
+3. Chama `resetChat()` e `initChat(newLanguage)`
+4. IA responde no novo idioma com o prompt correspondente
+
+#### Decisão: Validação de Telefone
+- **Mantida validação brasileira** em ambos idiomas (DDD + número)
+- Prompt em inglês: "Brazilian phone with area code (e.g., 11 99999-9999)"
+- Simplifica implementação, foco no mercado nacional
+
+### Dependências adicionadas
+- `i18next` - Core da internacionalização
+- `react-i18next` - Bindings para React
+
+### Arquivos criados
+- `src/i18n/index.ts`
+- `src/contexts/LanguageContext.tsx`
+- `src/components/shared/LanguageToggle.tsx`
+- 13 arquivos JSON em `src/i18n/locales/pt/`
+- 13 arquivos JSON em `src/i18n/locales/en/`
+- `src/i18n/locales/pt/aiPrompt.ts`
+- `src/i18n/locales/en/aiPrompt.ts`
+
+### Arquivos modificados
+- `src/App.tsx` - Adicionado LanguageProvider + import i18n
+- `src/services/geminiService.ts` - Aceita language param
+- `src/lib/summaryDetector.ts` - Keywords bilíngues
+- `src/components/layout/Header.tsx` - Toggle + traduções
+- `src/components/layout/MobileMenu.tsx` - Toggle + traduções
+- `src/components/layout/Footer.tsx` - Traduções
+- `src/components/sections/HeroSection.tsx` - Traduções
+- `src/components/sections/ServicesSection.tsx` - Traduções
+- `src/components/sections/EstimatorSection.tsx` - Traduções + reinício do chat
+- `src/components/shared/ServiceCard.tsx` - Traduções
+
+### Build
+- Build funcionando sem erros
+- index.js: 678.67 kB (gzip: 182.28 kB)
+
+### Próximos passos sugeridos
+- [ ] Traduzir seções restantes (About, Team, Projects, Contact, Process, QualiObra, Testimonials)
+- [ ] Testar fluxo completo do chat em inglês
+- [ ] Testar persistência do idioma (recarregar página)
+- [ ] Testar em dispositivos móveis
+- [ ] Deploy na Vercel
+
+---
+
 ## Template para novas entradas
 
 ```markdown

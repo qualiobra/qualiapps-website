@@ -1,0 +1,15 @@
+{
+  "sectionLabel": "Testimonials",
+  "sectionTitle": "What our partners say",
+  "sectionSubtitle": "Real results for real companies",
+  "items": {
+    "thiago-muzuco": {
+      "role": "Director, Engeral Construtora",
+      "content": "QualiApps understood our need to digitize construction site processes. The delivered solution not only organized our management but also increased field team engagement."
+    },
+    "felipe-araujo": {
+      "role": "CEO, Casa Fácil Blocos",
+      "content": "We needed a website that reflected the solidity of our industry. The QualiApps team delivered an impeccable design and an SEO structure that is already bringing us new clients."
+    }
+  }
+}

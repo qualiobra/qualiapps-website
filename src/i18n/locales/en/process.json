@@ -1,0 +1,12 @@
+{
+  "sectionLabel": "Methodology",
+  "sectionTitle": "Agile and Transparent Development",
+  "sectionDescription": "We use Scrum and Kanban to ensure you have full visibility of the project. Bi-weekly deliveries, constant feedback, and quick adaptation.",
+  "steps": [
+    "Discovery & Initial Planning",
+    "Design and Development Sprints",
+    "Automated Testing (QA)",
+    "Continuous Deploy and Monitoring"
+  ],
+  "learnMore": "Learn more about our process"
+}

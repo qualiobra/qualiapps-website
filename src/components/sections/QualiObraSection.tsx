@@ -2,9 +2,11 @@ import { Play } from 'lucide-react'
 import { AnimatedSection } from '@/components/shared/AnimatedSection'
 import { useTheme } from '@/contexts/ThemeContext'
 import { cn } from '@/lib/utils'
+import { useTranslation, Trans } from 'react-i18next'
 
 export function QualiObraSection() {
   const { isDark } = useTheme()
+  const { t } = useTranslation('qualiobra')
 
   return (
     <section
@@ -19,11 +21,11 @@ export function QualiObraSection() {
           {/* Content */}
           <AnimatedSection direction="left" className="lg:w-1/2">
             <div className="inline-flex items-center px-3 py-1 rounded-full bg-yellow-500/20 border border-yellow-500/50 text-yellow-500 text-sm font-bold mb-6 uppercase tracking-wider">
-              Produto Exclusivo
+              {t('badge')}
             </div>
             <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-              QualiObra: O Futuro da <br />
-              <span className="text-yellow-500">Construção Civil</span>
+              {t('headline.part1')} <br />
+              <span className="text-yellow-500">{t('headline.highlight')}</span>
             </h2>
             <p
               className={cn(
@@ -31,7 +33,7 @@ export function QualiObraSection() {
                 isDark ? 'text-neutral-300' : 'text-neutral-600'
               )}
             >
-              Nosso sistema de gestão da qualidade gamificado revolucionou canteiros de obras. O funcionário ganha pontos por cumprir requisitos de segurança e qualidade.
+              {t('description1')}
             </p>
             <p
               className={cn(
@@ -39,7 +41,13 @@ export function QualiObraSection() {
                 isDark ? 'text-neutral-300' : 'text-neutral-600'
               )}
             >
-              A <strong className={isDark ? 'text-white' : 'text-neutral-900'}>Quali (nossa IA)</strong> analisa fotos e vídeos enviados pelos colaboradores em tempo real, avaliando o uso de EPIs e EPCs. Tecnologia que salva vidas e aumenta a produtividade.
+              <Trans
+                i18nKey="description2"
+                ns="qualiobra"
+                components={{
+                  strong: <strong className={isDark ? 'text-white' : 'text-neutral-900'} />
+                }}
+              />
             </p>
 
             <a
@@ -52,7 +60,7 @@ export function QualiObraSection() {
               )}
             >
               <Play size={20} className="mr-2 fill-current" />
-              Assistir vídeo completo no YouTube
+              {t('watchVideo')}
             </a>
           </AnimatedSection>
 

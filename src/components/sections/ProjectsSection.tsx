@@ -1,14 +1,83 @@
 import { SectionTitle } from '@/components/shared/SectionTitle'
 import { AnimatedSection } from '@/components/shared/AnimatedSection'
 import { ProjectCard } from '@/components/shared/ProjectCard'
-import { projects } from '@/data/projects'
 import { useTheme } from '@/contexts/ThemeContext'
 import { cn } from '@/lib/utils'
+import { useTranslation } from 'react-i18next'
+import type { Project } from '@/types'
+
+const projectsConfig: Array<Omit<Project, 'description'> & { descriptionKey: string }> = [
+  {
+    id: 'qualiobra',
+    name: 'QualiObra',
+    descriptionKey: 'qualiobra',
+    type: 'mobile',
+    tags: ['React Native', 'IA', 'Gamificação', 'TypeScript'],
+    featured: true,
+    status: 'development',
+  },
+  {
+    id: 'qualiclub',
+    name: 'QualiClub',
+    descriptionKey: 'qualiclub',
+    type: 'fintech',
+    tags: ['Fintech', 'Mobile', 'Construção'],
+    featured: true,
+    status: 'development',
+  },
+  {
+    id: 'qualibroker',
+    name: 'QualiBroker',
+    descriptionKey: 'qualibroker',
+    type: 'mobile',
+    tags: ['React Native', 'Vendas', 'Imobiliário', 'TypeScript'],
+    featured: true,
+    status: 'beta',
+    url: 'https://www.qualibroker.app',
+  },
+  {
+    id: 'engeral',
+    name: 'Engeral Construtora',
+    descriptionKey: 'engeral',
+    type: 'website',
+    tags: ['React', 'Tailwind', 'Website'],
+    featured: false,
+    status: 'development',
+    url: 'https://www.engeralro.com.br',
+  },
+  {
+    id: 'casa-facil',
+    name: 'Casa Fácil',
+    descriptionKey: 'casa-facil',
+    type: 'website',
+    tags: ['React', 'Tailwind', 'Website'],
+    featured: false,
+    status: 'development',
+    url: 'https://www.casafacilblocos.com.br',
+  },
+  {
+    id: 'araujo-empreendimentos',
+    name: 'Araújo Empreendimentos',
+    descriptionKey: 'araujo-empreendimentos',
+    type: 'website',
+    tags: ['React', 'Tailwind', 'Website'],
+    featured: false,
+    status: 'completed',
+    url: 'https://www.araujoempreendimentos.com',
+  },
+]
 
 export function ProjectsSection() {
+  const { isDark } = useTheme()
+  const { t } = useTranslation('projects')
+
+  const projects = projectsConfig.map(p => ({
+    ...p,
+    description: t(`items.${p.descriptionKey}.description`),
+  }))
+
   const featuredProjects = projects.filter(p => p.featured)
   const otherProjects = projects.filter(p => !p.featured)
-  const { isDark } = useTheme()
 
   return (
     <section
@@ -20,8 +89,8 @@ export function ProjectsSection() {
     >
       <div className="container mx-auto px-4">
         <SectionTitle
-          title="Projetos"
-          subtitle="Conheça alguns dos nossos trabalhos"
+          title={t('sectionLabel')}
+          subtitle={t('sectionTitle')}
         />
 
         {/* Featured Projects - WebApps */}
@@ -29,7 +98,7 @@ export function ProjectsSection() {
           <div className="mb-8">
             <AnimatedSection>
               <h3 className="text-lg font-semibold text-primary mb-4">
-                WebApps
+                {t('categories.webapps')}
               </h3>
             </AnimatedSection>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -52,7 +121,7 @@ export function ProjectsSection() {
                   isDark ? 'text-neutral-400' : 'text-neutral-500'
                 )}
               >
-                Websites
+                {t('categories.websites')}
               </h3>
             </AnimatedSection>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

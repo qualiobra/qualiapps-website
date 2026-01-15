@@ -6,10 +6,13 @@ import { PrivacyPolicy } from '@/components/shared/PrivacyPolicy'
 import { NAV_LINKS, COMPANY, WHATSAPP_URL } from '@/lib/constants'
 import { useTheme } from '@/contexts/ThemeContext'
 import { cn } from '@/lib/utils'
+import { useTranslation } from 'react-i18next'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
   const { isDark } = useTheme()
+  const { t } = useTranslation('footer')
+  const { t: tNav } = useTranslation('navigation')
 
   return (
     <footer
@@ -31,8 +34,7 @@ export function Footer() {
                 isDark ? 'text-neutral-400' : 'text-neutral-600'
               )}
             >
-              Transformamos ideias em soluções digitais. Desenvolvimento de sistemas e
-              websites para pequenas e médias empresas com preços justos e foco em IA.
+              {t('description')}
             </p>
             <div
               className={cn(
@@ -40,9 +42,9 @@ export function Footer() {
                 isDark ? 'text-neutral-500' : 'text-neutral-500'
               )}
             >
-              <span>Feito com</span>
+              <span>{t('madeWith')}</span>
               <Heart className="h-4 w-4 text-primary fill-primary" />
-              <span>no Brasil</span>
+              <span>{t('inBrazil')}</span>
             </div>
           </div>
 
@@ -54,7 +56,7 @@ export function Footer() {
                 isDark ? 'text-white' : 'text-neutral-900'
               )}
             >
-              Links Rápidos
+              {t('quickLinks')}
             </h4>
             <ul className="space-y-2">
               {NAV_LINKS.map((link) => (
@@ -69,7 +71,7 @@ export function Footer() {
                       isDark ? 'text-neutral-400' : 'text-neutral-600'
                     )}
                   >
-                    {link.name}
+                    {tNav(link.to === 'hero' ? 'home' : link.to)}
                   </Link>
                 </li>
               ))}
@@ -84,7 +86,7 @@ export function Footer() {
                 isDark ? 'text-white' : 'text-neutral-900'
               )}
             >
-              Contato
+              {t('contact')}
             </h4>
             <ul className="space-y-3">
               <li>
@@ -142,15 +144,15 @@ export function Footer() {
         >
           <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4">
             <p>
-              &copy; {currentYear} {COMPANY.name}. Todos os direitos reservados.
+              &copy; {currentYear} {COMPANY.name}. {t('copyright')}
             </p>
             <span className="hidden md:inline">•</span>
             <PrivacyPolicy />
           </div>
           <p className="flex items-center gap-1">
-            Valores: <span className="text-primary">Fé em Deus</span> •{' '}
-            <span className="text-primary">Verdade</span> •{' '}
-            <span className="text-primary">Design</span>
+            {t('values')} <span className="text-primary">{t('valuesItems.faith')}</span> •{' '}
+            <span className="text-primary">{t('valuesItems.truth')}</span> •{' '}
+            <span className="text-primary">{t('valuesItems.design')}</span>
           </p>
         </div>
       </div>

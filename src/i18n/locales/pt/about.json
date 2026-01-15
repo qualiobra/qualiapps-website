@@ -1,0 +1,37 @@
+{
+  "sectionLabel": "Nossa História",
+  "headline": {
+    "part1": "Nascidos da obra,",
+    "part2": "criados para o",
+    "highlight": "futuro digital"
+  },
+  "description1": "Fundada em 2025 por Lucas Araújo, a QualiApps surgiu de uma necessidade real no canteiro de obras. O sonho começou com o <strong>QualiObra</strong>, um sistema gamificado onde a Inteligência Artificial \"Quali\" avalia a segurança e qualidade através de fotos enviadas pelos trabalhadores.",
+  "description2": "Utilizando ferramentas avançadas de IA para acelerar o aprendizado e o desenvolvimento, percebemos que poderíamos fazer mais. Nossa missão hoje é clara: oferecer sistemas e websites de alto nível para pequenas e médias empresas a um preço justo, gerando engajamento real através da tecnologia.",
+  "card": {
+    "label": "Inovação",
+    "text": "IA + Construção Civil"
+  },
+  "values": {
+    "title": "Nossos Valores",
+    "subtitle": "A cultura que nos move todos os dias.",
+    "faith": {
+      "title": "Fé em Deus",
+      "description": "Nosso alicerce inegociável. Acreditamos que o trabalho feito com propósito, ética e gratidão gera frutos que vão além do código."
+    },
+    "truth": {
+      "title": "Verdade",
+      "description": "Transparência radical com o cliente. Sem letras miúdas. Entregamos o que prometemos, com honestidade sobre prazos e custos."
+    },
+    "design": {
+      "title": "Design",
+      "description": "A funcionalidade não vive sem a beleza. Criamos interfaces que encantam e proporcionam uma experiência de usuário fluida e moderna."
+    }
+  },
+  "projects": {
+    "corporateClient": "Cliente Corporativo",
+    "industry": "Indústria",
+    "construction": "Construção Civil",
+    "ownProduct": "Produto Próprio (IA)",
+    "fintech": "Fintech (Em breve)"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "sectionLabel": "Portfolio",
+  "sectionTitle": "Check out some of our work",
+  "categories": {
+    "all": "All",
+    "webapps": "WebApps",
+    "websites": "Websites"
+  },
+  "status": {
+    "development": "In development",
+    "beta": "Beta Test",
+    "completed": "Completed"
+  },
+  "viewProject": "View project",
+  "items": {
+    "qualiobra": {
+      "description": "Gamified quality management system for construction. Workers earn points for quality compliance and PPE/CPE use. AI chat (Quali) for service validation through images and videos."
+    },
+    "qualiclub": {
+      "description": "Fintech project for the construction industry. Innovative financial solutions for builders and workers."
+    },
+    "qualibroker": {
+      "description": "Smart sales management app for builders, developers, and real estate agents. Check available units, run simulations, and reserve units."
+    },
+    "engeral": {
+      "description": "Modern institutional website for a construction company, highlighting projects and expertise in construction."
+    },
+    "casa-facil": {
+      "description": "Website for a structural concrete block manufacturing industry, with product catalog and contact."
+    },
+    "araujo-empreendimentos": {
+      "description": "Institutional website for a developer, presenting projects and investment opportunities."
+    }
+  }
+}
