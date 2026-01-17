@@ -82,7 +82,8 @@ export function ProcessSection() {
               />
               <img
                 src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                alt={t('sectionTitle')}
+                alt="Equipe de desenvolvedores colaborando em projeto de software"
+                loading="lazy"
                 className="relative rounded-lg shadow-xl"
               />
             </div>

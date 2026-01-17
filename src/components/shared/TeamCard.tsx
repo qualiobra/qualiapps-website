@@ -28,7 +28,8 @@ export function TeamCard({ member, className }: TeamCardProps) {
           {member.image ? (
             <img
               src={member.image}
-              alt={member.name}
+              alt={`Foto de ${member.name}, ${member.role} na QualiApps`}
+              loading="lazy"
               className="w-full h-full object-cover"
             />
           ) : (
@@ -64,6 +65,7 @@ export function TeamCard({ member, className }: TeamCardProps) {
                 href={member.social.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={`LinkedIn de ${member.name}`}
                 className={cn(
                   'p-2 rounded-full transition-colors',
                   isDark
@@ -79,6 +81,7 @@ export function TeamCard({ member, className }: TeamCardProps) {
                 href={member.social.github}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={`GitHub de ${member.name}`}
                 className={cn(
                   'p-2 rounded-full transition-colors',
                   isDark
@@ -94,6 +97,7 @@ export function TeamCard({ member, className }: TeamCardProps) {
                 href={member.social.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={`Instagram de ${member.name}`}
                 className={cn(
                   'p-2 rounded-full transition-colors',
                   isDark

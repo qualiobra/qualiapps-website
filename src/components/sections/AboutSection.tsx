@@ -47,7 +47,8 @@ export function AboutSection() {
               <div className="absolute -inset-4 bg-gradient-to-tr from-cyan-500 to-teal-400 rounded-2xl opacity-20 blur-lg transform -rotate-2" />
               <img
                 src="/nossa-historia.png"
-                alt={t('sectionLabel')}
+                alt="Equipe QualiApps em reunião de desenvolvimento de software"
+                loading="lazy"
                 className="relative rounded-2xl shadow-2xl w-full object-cover h-[500px]"
               />
               <div

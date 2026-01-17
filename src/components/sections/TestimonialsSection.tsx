@@ -77,7 +77,8 @@ export function TestimonialsSection() {
                 <div className="flex items-center">
                   <img
                     src={testimonial.image}
-                    alt={testimonial.name}
+                    alt={`Foto de ${testimonial.name}`}
+                    loading="lazy"
                     className="w-12 h-12 rounded-full mr-4"
                   />
                   <div>
