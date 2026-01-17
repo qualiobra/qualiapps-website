@@ -1,5 +1,5 @@
 import { Link } from 'react-scroll'
-import { Heart, Mail, Phone, MapPin } from 'lucide-react'
+import { Heart, Mail, Phone, MapPin, Instagram, Youtube } from 'lucide-react'
 import { Logo } from '@/components/shared/Logo'
 import { Separator } from '@/components/ui/separator'
 import { PrivacyPolicy } from '@/components/shared/PrivacyPolicy'
@@ -125,6 +125,33 @@ export function Footer() {
                 {COMPANY.location}
               </li>
             </ul>
+            {/* Redes sociais */}
+            <div className="flex items-center gap-4 mt-4">
+              <a
+                href={COMPANY.social.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  'hover:text-primary transition-colors',
+                  isDark ? 'text-neutral-400' : 'text-neutral-600'
+                )}
+                aria-label="Instagram"
+              >
+                <Instagram className="h-5 w-5" />
+              </a>
+              <a
+                href={COMPANY.social.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  'hover:text-primary transition-colors',
+                  isDark ? 'text-neutral-400' : 'text-neutral-600'
+                )}
+                aria-label="YouTube"
+              >
+                <Youtube className="h-5 w-5" />
+              </a>
+            </div>
           </div>
         </div>
 

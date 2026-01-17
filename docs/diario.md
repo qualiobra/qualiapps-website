@@ -1097,6 +1097,48 @@ Criada seção FAQ com HTML semântico (`<details>` e `<summary>`):
 
 ---
 
+## 17 de Janeiro de 2026 (Sessão 17)
+
+### O que foi feito
+Otimização de SEO tradicional com termos de pesquisa reais do Google + ícones de redes sociais no Footer.
+
+#### 1. Meta Tags - Termos de Pesquisa
+Atualizadas meta tags com termos que as pessoas realmente pesquisam:
+
+**Meta Description:**
+- Adicionado "Empresa de desenvolvimento de aplicativos" (termo exato)
+- Adicionado "Porto Velho, Rondônia" (foco regional)
+
+**Meta Keywords - Novos termos:**
+- empresa de desenvolvimento de aplicativos
+- desenvolvimento de software
+- criar aplicativo / fazer app
+- desenvolvimento web / criar site
+- software Porto Velho / desenvolvimento Rondônia
+- app personalizado / sistema sob medida
+
+**Open Graph e Twitter:**
+- Descrições alinhadas com meta description
+
+#### 2. Footer - Ícones de Redes Sociais
+- Adicionados ícones de Instagram e YouTube abaixo da seção de contato
+- Links apontam para COMPANY.social (Instagram e YouTube)
+- Ícones com hover effect (cor primary)
+
+### Arquivos modificados
+- `index.html` - meta description, keywords, og:description, twitter:description
+- `src/components/layout/Footer.tsx` - ícones Instagram e YouTube
+
+### Build
+- Build funcionando sem erros
+- index.js: 692.85 kB (gzip: 186.47 kB)
+
+### Próximos passos sugeridos
+- [ ] Validar SEO com Google Search Console
+- [ ] Monitorar posicionamento para termos regionais (Porto Velho, Rondônia)
+
+---
+
 ## Template para novas entradas
 
 ```markdown
