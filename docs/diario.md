@@ -1139,6 +1139,45 @@ Atualizadas meta tags com termos que as pessoas realmente pesquisam:
 
 ---
 
+## 17 de Janeiro de 2026 (Sessão 18)
+
+### O que foi feito
+Correção de bug visual no mobile onde o badge "Desenvolvimento Ágil com IA" sobrepunha o header/logo.
+
+#### Problema Identificado
+No mobile, o badge "Desenvolvimento Ágil com IA" ficava sobreposto ao header/logo devido à centralização vertical (`flex items-center justify-center`) da Hero Section.
+
+#### Causa Raiz
+- Hero Section usa `min-h-screen flex items-center justify-center` (linha 16)
+- O content wrapper (linha 67) não tinha padding-top para compensar o header fixo (~80px)
+- No mobile, com viewport menor, a centralização vertical colocava o badge muito próximo do topo
+
+#### Solução Aplicada
+Adicionado padding-top responsivo ao content wrapper:
+```tsx
+// Antes
+<div className="relative z-10 container mx-auto px-4 text-center">
+
+// Depois
+<div className="relative z-10 container mx-auto px-4 pt-20 md:pt-0 text-center">
+```
+
+- `pt-20` = 80px de padding-top no mobile (compensa header fixo)
+- `md:pt-0` = remove padding no desktop (mantém centralização intacta)
+
+### Arquivos modificados
+- `src/components/sections/HeroSection.tsx` - linha 67
+
+### Build
+- Build funcionando sem erros
+- index.js: 692.86 kB (gzip: 186.50 kB)
+
+### Próximos passos sugeridos
+- [ ] Testar em dispositivo móvel real
+- [ ] Verificar se outras seções têm problemas similares
+
+---
+
 ## Template para novas entradas
 
 ```markdown
