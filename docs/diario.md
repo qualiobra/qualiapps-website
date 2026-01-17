@@ -926,6 +926,177 @@ Criados em `src/i18n/locales/{pt,en}/`:
 
 ---
 
+## 16 de Janeiro de 2026 (Sessão 15)
+
+### O que foi feito
+Criação do projeto **QualiApps Finance** - Sistema de controle financeiro interno (intranet).
+
+#### Novo Projeto Criado
+- **Local:** `C:\Users\lucas\qualiapps-finance`
+- **Stack:** React 18 + Vite + TypeScript + Tailwind CSS v4 + shadcn/ui + Supabase
+
+#### Estrutura Implementada
+```
+qualiapps-finance/
+├── src/
+│   ├── components/
+│   │   ├── layout/
+│   │   │   └── AppLayout.tsx      # Layout com Sidebar + Header
+│   │   └── ui/                    # Componentes shadcn/ui
+│   ├── contexts/
+│   │   ├── AuthContext.tsx        # Autenticação Google via Supabase
+│   │   └── ThemeContext.tsx       # Toggle dark/light mode
+│   ├── lib/
+│   │   ├── supabase.ts            # Cliente Supabase
+│   │   ├── constants.ts           # Constantes do app
+│   │   └── utils.ts               # Utilitários
+│   ├── pages/
+│   │   ├── Login.tsx              # Tela de login Google
+│   │   ├── Dashboard.tsx          # Visão geral financeira
+│   │   ├── Projects.tsx           # CRUD de projetos
+│   │   ├── Clients.tsx            # CRUD de clientes
+│   │   ├── Suppliers.tsx          # CRUD de fornecedores
+│   │   ├── Receivables.tsx        # Contas a receber
+│   │   └── Payables.tsx           # Contas a pagar
+│   └── types/
+│       └── index.ts               # Tipos TypeScript
+└── supabase/
+    └── schema.sql                 # SQL para criar tabelas
+```
+
+#### Funcionalidades
+- **Autenticação:** Login com Google + whitelist de emails autorizados
+- **Dashboard:** Cards de resumo (A Receber, A Pagar, Saldo, Atrasados)
+- **Projetos:** CRUD com status (Ativo, Pausado, Concluído)
+- **Clientes:** CRUD com dados de contato
+- **Fornecedores:** CRUD com categorias
+- **Contas a Receber:** Lista com filtros, status, marcar como pago
+- **Contas a Pagar:** Lista com categorias, suporte a recorrência
+- **Tema:** Toggle dark/light mode
+- **Responsivo:** Layout adaptável para mobile
+
+#### Componentes shadcn/ui Instalados
+- button, card, input, label, select, textarea
+- table, dialog, dropdown-menu, badge
+- separator, avatar, tooltip, tabs, sheet, sidebar
+
+#### Schema do Banco (Supabase)
+- `authorized_users` - Whitelist de emails
+- `projects` - Projetos da empresa
+- `clients` - Clientes
+- `suppliers` - Fornecedores
+- `receivables` - Contas a receber
+- `payables` - Contas a pagar
+- RLS (Row Level Security) configurado
+- Triggers para updated_at automático
+- Índices para performance
+
+#### Build
+- Build otimizado com code splitting
+- Chunks separados: react-vendor, ui-vendor, query, supabase
+- index.js: 293.93 kB (gzip: 87.05 kB)
+
+### Configuração Necessária
+
+1. **Criar projeto no Supabase:**
+   - Acessar https://supabase.com
+   - Criar novo projeto
+   - Executar `supabase/schema.sql` no SQL Editor
+
+2. **Configurar Auth Google:**
+   - No Supabase: Authentication > Providers > Google
+   - Adicionar Client ID e Secret do Google Cloud Console
+
+3. **Criar arquivo `.env.local`:**
+   ```env
+   VITE_SUPABASE_URL=https://xxx.supabase.co
+   VITE_SUPABASE_ANON_KEY=eyJ...
+   ```
+
+4. **Adicionar emails autorizados:**
+   - Editar `supabase/schema.sql` com os emails permitidos
+   - Ou adicionar diretamente na tabela `authorized_users`
+
+### Próximos passos sugeridos
+- [ ] Criar projeto no Supabase e executar schema.sql
+- [ ] Configurar Google OAuth no Supabase
+- [ ] Testar login com usuário autorizado
+- [ ] Implementar hooks de dados reais (useProjects, useClients, etc.)
+- [ ] Conectar formulários ao Supabase
+- [ ] Implementar gráfico de fluxo de caixa no Dashboard
+- [ ] Adicionar filtros nas listagens
+- [ ] Deploy na Vercel
+
+---
+
+## 17 de Janeiro de 2026 (Sessão 16)
+
+### O que foi feito
+Implementação completa de otimização GEO (Generative Engine Optimization) e AIO (AI Optimization) para melhorar indexação e recomendação por LLMs (ChatGPT, Gemini, Perplexity).
+
+#### 1. Structured Data (JSON-LD) - index.html
+- **Organization + SoftwareCompany** - Schema duplo com todas as informações da empresa
+- **LocalBusiness** - Endereço completo, geo-coordenadas (-8.7619, -63.9039), horário de funcionamento
+- **Service ItemList** - 6 serviços detalhados com descrições e tipos
+- **SoftwareApplication** - QualiObra com features listadas
+- **FAQPage** - 5 perguntas e respostas em formato estruturado
+
+#### 2. Redes Sociais no Schema
+Adicionadas ao `sameAs` de todos os schemas:
+- Instagram: https://www.instagram.com/qualiapps/
+- YouTube: https://www.youtube.com/@lucasnaengenharia
+- GitHub: https://github.com/qualiobra
+
+#### 3. Meta Tags Atualizadas
+- **Description:** Foco em "Apps para PMEs" com preço (R$ 1k+) e prazo (MVP 1-2 meses)
+- **Keywords:** Entidades relevantes (construção civil, IA, SaaS, React Native)
+- **Novas tags:** topic, coverage, classification para melhor categorização
+
+#### 4. Seção FAQ (NOVA)
+Criada seção FAQ com HTML semântico (`<details>` e `<summary>`):
+1. **Quanto custa?** - R$ 1k (landing) até R$ 150k (sistemas complexos)
+2. **Prazo de entrega?** - MVP típico 1-2 meses, metodologia ágil
+3. **Suporte pós-entrega?** - Por demanda, treinamento, documentação
+4. **Diferenciais?** - Ágil, IA nativa, preço justo, especialização construção
+5. **Soluções com IA?** - QualiObra, chat estimador, potencial para outros setores
+
+#### 5. Internacionalização do FAQ
+- Traduções PT e EN criadas
+- FAQ namespace adicionado ao i18n
+
+#### 6. Navegação
+- Link "FAQ" adicionado ao menu principal
+
+### Arquivos criados
+- `src/components/sections/FAQSection.tsx` - Componente FAQ com <details>/<summary>
+- `src/data/faq.ts` - Estrutura de dados do FAQ
+- `src/i18n/locales/pt/faq.json` - Traduções português
+- `src/i18n/locales/en/faq.json` - Traduções inglês
+
+### Arquivos modificados
+- `index.html` - 5 JSON-LD schemas + meta tags atualizadas
+- `src/lib/constants.ts` - postalCode, geo, social URLs
+- `src/i18n/index.ts` - Namespace FAQ registrado
+- `src/i18n/locales/pt/navigation.json` - Link FAQ
+- `src/i18n/locales/en/navigation.json` - Link FAQ
+- `src/App.tsx` - FAQSection importada
+
+### Build
+- Build funcionando sem erros
+- index.js: 691.75 kB (gzip: 186.28 kB)
+
+### Verificação Recomendada
+- Schema: https://validator.schema.org/
+- Rich Results: https://search.google.com/test/rich-results
+
+### Próximos passos sugeridos
+- [ ] Validar schemas no Schema.org Validator
+- [ ] Testar no Google Rich Results Test
+- [ ] Submeter sitemap atualizado ao Google Search Console
+- [ ] Monitorar indexação por LLMs
+
+---
+
 ## Template para novas entradas
 
 ```markdown

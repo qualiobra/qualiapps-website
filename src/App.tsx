@@ -10,6 +10,7 @@ import { AboutSection } from '@/components/sections/AboutSection'
 import { QualiObraSection } from '@/components/sections/QualiObraSection'
 import { ProcessSection } from '@/components/sections/ProcessSection'
 import { EstimatorSection } from '@/components/sections/EstimatorSection'
+import { FAQSection } from '@/components/sections/FAQSection'
 import { TestimonialsSection } from '@/components/sections/TestimonialsSection'
 import { ProjectsSection } from '@/components/sections/ProjectsSection'
 import { TeamSection } from '@/components/sections/TeamSection'
@@ -29,6 +30,7 @@ function App() {
           <QualiObraSection />
           <ProcessSection />
           <EstimatorSection />
+          <FAQSection />
           <TestimonialsSection />
           <ProjectsSection />
           <TeamSection />

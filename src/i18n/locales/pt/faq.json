@@ -1,0 +1,18 @@
+{
+  "title": "Perguntas Frequentes",
+  "subtitle": "Tire suas dúvidas sobre nossos serviços",
+  "questions": {
+    "pricing": "Quanto custa desenvolver um aplicativo ou sistema com a QualiApps?",
+    "timeline": "Quanto tempo leva para entregar um MVP (versão inicial funcional)?",
+    "support": "A QualiApps oferece suporte e manutenção após a entrega?",
+    "differentials": "Quais são os diferenciais da QualiApps em relação a outras empresas?",
+    "ai": "A QualiApps desenvolve soluções com Inteligência Artificial?"
+  },
+  "answers": {
+    "pricing": "Os projetos da QualiApps variam de R$ 1.000 para landing pages simples até R$ 150.000 para sistemas complexos. Trabalhamos com pagamento em entrada + parcelas. Use nosso chat com IA no site para obter uma estimativa inicial, e nossa equipe entrará em contato para um orçamento personalizado após análise do escopo.",
+    "timeline": "Um MVP típico leva de 1 a 2 meses para ser entregue. Utilizamos metodologia ágil com entregas incrementais em sprints de 2 semanas, permitindo que você veja versões funcionais do seu projeto durante o desenvolvimento. O prazo final varia conforme a complexidade do projeto.",
+    "support": "Sim! Oferecemos suporte por demanda (pago conforme necessidade). Incluímos treinamento para sua equipe, documentação técnica completa, e a possibilidade de contrato de manutenção mensal para atualizações e correções contínuas.",
+    "differentials": "Nossos principais diferenciais são: metodologia ágil com entregas rápidas, integração nativa com Inteligência Artificial em todos os projetos, preço justo e acessível para PMEs, e especialização em construção civil e setor imobiliário. Temos resultados comprovados com clientes como Casa Fácil Blocos, que já relatam aumento de eficiência, vendas e redução de custos.",
+    "ai": "Sim! A IA está integrada em todos os nossos projetos quando relevante. Nosso produto QualiObra usa IA para validar serviços por foto e vídeo, verificar uso correto de EPIs, e gamificar processos de qualidade em obras. Também temos um chat estimador com IA no próprio site. A tecnologia pode ser adaptada para outros setores além da construção civil."
+  }
+}

@@ -15,6 +15,7 @@ import ptProcess from './locales/pt/process.json'
 import ptQualiobra from './locales/pt/qualiobra.json'
 import ptTestimonials from './locales/pt/testimonials.json'
 import ptFooter from './locales/pt/footer.json'
+import ptFaq from './locales/pt/faq.json'
 
 import enCommon from './locales/en/common.json'
 import enNavigation from './locales/en/navigation.json'
@@ -29,6 +30,7 @@ import enProcess from './locales/en/process.json'
 import enQualiobra from './locales/en/qualiobra.json'
 import enTestimonials from './locales/en/testimonials.json'
 import enFooter from './locales/en/footer.json'
+import enFaq from './locales/en/faq.json'
 
 export const resources = {
   pt: {
@@ -45,6 +47,7 @@ export const resources = {
     qualiobra: ptQualiobra,
     testimonials: ptTestimonials,
     footer: ptFooter,
+    faq: ptFaq,
   },
   en: {
     common: enCommon,
@@ -60,6 +63,7 @@ export const resources = {
     qualiobra: enQualiobra,
     testimonials: enTestimonials,
     footer: enFooter,
+    faq: enFaq,
   },
 }
 

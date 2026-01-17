@@ -1,0 +1,18 @@
+{
+  "title": "Frequently Asked Questions",
+  "subtitle": "Get answers about our services",
+  "questions": {
+    "pricing": "How much does it cost to develop an app or system with QualiApps?",
+    "timeline": "How long does it take to deliver an MVP (minimum viable product)?",
+    "support": "Does QualiApps offer support and maintenance after delivery?",
+    "differentials": "What are QualiApps' differentiators compared to other companies?",
+    "ai": "Does QualiApps develop Artificial Intelligence solutions?"
+  },
+  "answers": {
+    "pricing": "QualiApps projects range from $200 for simple landing pages up to $30,000 for complex systems. We work with down payment + installments. Use our AI chat on the website to get an initial estimate, and our team will contact you for a personalized quote after analyzing your scope.",
+    "timeline": "A typical MVP takes 1 to 2 months to deliver. We use agile methodology with incremental deliveries in 2-week sprints, allowing you to see functional versions of your project during development. The final timeline varies according to project complexity.",
+    "support": "Yes! We offer on-demand support (paid as needed). We include training for your team, complete technical documentation, and the possibility of monthly maintenance contracts for ongoing updates and fixes.",
+    "differentials": "Our main differentiators are: agile methodology with fast deliveries, native integration with Artificial Intelligence in all projects, fair and accessible pricing for SMBs, and specialization in construction and real estate sectors. We have proven results with clients like Casa Fácil Blocos, who report increased efficiency, sales, and cost reduction.",
+    "ai": "Yes! AI is integrated into all our projects when relevant. Our QualiObra product uses AI to validate services through photos and videos, verify correct use of PPE, and gamify quality processes on construction sites. We also have an AI estimator chat on our website. The technology can be adapted to other sectors beyond construction."
+  }
+}
