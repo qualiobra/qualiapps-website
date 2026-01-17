@@ -123,7 +123,7 @@ export function PrivacyPolicy() {
 
             <div className="mt-8 pt-6 border-t border-neutral-700">
               <p className="text-sm text-neutral-500">
-                {COMPANY.name} - CNPJ em processo de registro<br />
+                {COMPANY.name} - CNPJ: 36.170.103/0001-47<br />
                 {COMPANY.location}
               </p>
             </div>
